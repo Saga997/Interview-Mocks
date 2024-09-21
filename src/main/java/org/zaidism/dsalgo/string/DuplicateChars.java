@@ -19,7 +19,8 @@ public class DuplicateChars {
     System.out.println(occrenceMap);
     // another way
     Map<Character, Long> occurrenceCharMap =
-        Arrays.stream(name.split("")).collect(Collectors.groupingBy(s -> s.charAt(0), counting()));
+        Arrays.stream(name.split("")).collect(Collectors.groupingBy
+                (s -> s.charAt(0), counting()));
 
     System.out.println(occurrenceCharMap);
 

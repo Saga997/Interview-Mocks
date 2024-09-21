@@ -1,0 +1,27 @@
+1.Find Second Largest element in the array
+Integer[] arr = {8,9,4,0};
+
+OptionalInt secondLargest = Arrays.stream(arr).distinct().boxed() // convert in to integer to use Comparator
+                           .sorted((a,b)->b_a)
+                           .skip(1)
+                           .mapToInt(Integer::intValue)
+                           .findFirst();
+
+
+//OptionalInt is a container object that may or may not contain an int value. It's used here to safely handle cases
+where the second largest element might not exist.
+
+
+Arrange array in descending order:
+Stream<Integer> sortedStream = arList.stream().filter(i->i>20)
+                               .sorted((i1,i2)->i2.compareTo(i1));
+
+
+Find maximum and minimun in array:
+ Optional<Integer> minValue = arList.stream()
+                                    .filter(i -> i % 2 == 0) // Filter even numbers, as an example of a valid predicate
+                                    .min(Integer::compareTo); // for minimum
+                                    .max(Integer::compareTo); // for maximum
+
+
+

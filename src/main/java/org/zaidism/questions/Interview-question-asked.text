@@ -2,8 +2,10 @@ Java:
 
 1. What is a marker interface in Java, and why is it used? Provide examples like Serializable and Cloneable.
 2. Explain Object-Oriented Programming (OOP) concepts with real-world examples.
-3. When should you use an abstract class, and when should you use an interface? // abstract classes can have constructors
-4. Discuss the potential issues if HashMap generates the same hashcode for different keys. Provide insights into the internal workings of HashMap.
+3. When should you use an abstract class, and when should you use an interface? //
+abstract classes can have constructors
+4. Discuss the potential issues if HashMap generates the same hashcode for different keys.
+Provide insights into the internal workings of HashMap.
 5. Elaborate on the roles of `hashCode` and `equals` methods in Java.
 6. Create a thread-safe Singleton class and explain its implementation. When do we use a Singleton class? How to prevent singleton design from reflection, serialization and clone?
 7. Can static methods be overloaded? Can they be overridden?
@@ -70,6 +72,8 @@ Java:
 74. What are the differences between constructor and method of a class in Java.
 75. What are wildcards in java what's their use?
 
+
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Spring Boot, JPA, Hibernate, Maven, Security, Rest API & Microservices
 
@@ -126,7 +130,8 @@ Spring Boot, JPA, Hibernate, Maven, Security, Rest API & Microservices
 52. How to map a table many to many like student and course in JPA also highlight use of "Mapped by".
 53. Explain all annotation and properties requires to implement circuit breaker, service registry/discovery and API gateway.
 54. Explain orchestration and choreography.
-55. write a jpa method to fetch list of employees based on their age and salary without any query? //    List<Employee> findByAgeAndSalary(int age, double salary);
+55. write a jpa method to fetch list of employees based on their age and salary without any query? //
+List<Employee> findByAgeAndSalary(int age, double salary);
 56. How to implement rate limiter in circuit breaker?
 57. Explain AOP in details what are the cross cutting concerns that can be added as a part of AOP implementation in your projects.
 58. How to handle exception in spring boot?

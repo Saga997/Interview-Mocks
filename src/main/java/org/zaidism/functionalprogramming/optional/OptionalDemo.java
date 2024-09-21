@@ -65,4 +65,32 @@ public class OptionalDemo {
     String nameFromDB = "jahid"; // try with an actual value as well as with null
     return Optional.ofNullable(nameFromDB); // you can return Optional.empty() also to return value
   }
+
+  /*Optional is a container object used to represent the presence or absence of a value. Optional.of() and
+Optional.ofNullable() are methods used to create Optional instances, but they handle null values differently.
+
+Optional.of() is used to create an Optional instance with a non-null value. It is meant to be used when you are
+sure that the value being wrapped is not null.
+
+Optional.ofNullable() creates an Optional instance that can hold either a non-null value or be empty if the value is
+null. when the value might be null, and you want to safely create an Optional without risking a NullPointerException.
+Return type on NULL value : Optional.empty()
+
+try {
+            String nonNullValue = "OpenAI";
+            Optional<String> optional1 = Optional.of(nonNullValue);
+            System.out.println(optional1.get()); // Prints: OpenAI
+
+            String nullValue = null;
+            Optional<String> optional2 = Optional.of(nullValue); // Throws NullPointerException
+        } catch (NullPointerException e) {
+            System.out.println("Caught NullPointerException: " + e.getMessage());
+        }
+
+        // Using Optional.ofNullable()
+        String nullValue = null;
+        Optional<String> optional3 = Optional.ofNullable(nullValue);
+        System.out.println(optional3.isPresent()); // Prints: false
+    }
+   */
 }

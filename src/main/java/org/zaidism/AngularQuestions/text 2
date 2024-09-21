@@ -1,0 +1,56 @@
+Decorator (@Component):
+
+Every Angular component is marked with a @Component decorator, which provides metadata about the component,
+such as the selector, template, and styles.
+
+@Component({
+  selector: 'app-example',
+  templateUrl: './example.component.html',
+  styleUrls: ['./example.component.css']
+})
+
+Selector:
+The selector defines the custom HTML tag that will be used to include this component in other templates.
+Example: <app-example></app-example>
+
+Template:
+This is the HTML view of the component. It can be either defined inline or through an external HTML file
+(linked via templateUrl).
+
+<div>
+  <h1>{{ title }}</h1>
+  <p>{{ description }}</p>
+</div>
+
+Class (Component Logic):
+The class contains the component’s logic, such as properties, methods, and lifecycle hooks.
+
+export class ExampleComponent {
+  title = 'Hello World';
+  description = 'This is an example component';
+}
+
+Styles:
+The styles specific to the component, which can be inline or in an external CSS/SCSS file (linked via styleUrls).
+
+h1 {
+  color: blue;
+}
+
+
+Lifecycle Hooks:
+
+These are methods provided by Angular that allow developers to hook into key events during a component's lifecycle,
+such as initialization (ngOnInit), changes to input properties (ngOnChanges), or destruction (ngOnDestroy).
+
+Inputs and Outputs:
+
+@Input: Used to pass data into the component from a parent component.
+@Output: Used to emit events from the component to a parent component.
+
+@Input() title: string;
+@Output() eventEmitted = new EventEmitter<string>();
+Modules:
+
+A component is typically declared inside an Angular module, which organizes multiple components into cohesive
+blocks of functionality.

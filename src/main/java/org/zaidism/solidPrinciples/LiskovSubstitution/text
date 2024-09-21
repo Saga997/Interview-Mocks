@@ -1,0 +1,66 @@
+Objects of a superclass should be replaceable with objects of a subclass without affecting
+the correctness of the program.”
+
+Consider the following example, where Bird is the base class and Penguin is a subclass. In this case,
+penguins cannot fly, so using the fly() method directly would violate the LSP.
+// Base class
+class Bird {
+    public void fly() {
+        System.out.println("Bird is flying");
+    }
+}
+
+// Subclass violating LSP
+class Penguin extends Bird {
+    @Override
+    public void fly() {
+        throw new UnsupportedOperationException("Penguins can't fly!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Liskov substitution violation
+        Bird bird = new Penguin();  // Assigning subclass object to superclass type
+        bird.fly();  // This will cause an exception as penguins can't fly
+    }
+}
+
+// Base class
+class Bird {
+    public void eat() {
+        System.out.println("Bird is eating");
+    }
+}
+
+// Subclass for flying birds
+class FlyingBird extends Bird {
+    public void fly() {
+        System.out.println("Flying bird is flying");
+    }
+}
+
+// Penguin class doesn't extend FlyingBird because it can't fly
+class Penguin extends Bird {
+    // Penguin-specific behavior
+    public void swim() {
+        System.out.println("Penguin is swimming");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Now both substitutions will work correctly
+
+        Bird sparrow = new FlyingBird();
+        sparrow.eat();  // Works as expected
+        ((FlyingBird) sparrow).fly();  // Works as expected
+
+        Bird penguin = new Penguin();  // Still valid substitution
+        penguin.eat();  // Works as expected
+
+        // We do not expect Penguin to fly, so no need to call fly on Penguin
+        ((Penguin) penguin).swim();  // Works as expected
+    }
+}
+

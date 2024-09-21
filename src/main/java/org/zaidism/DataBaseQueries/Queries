@@ -1,0 +1,138 @@
+1.Fetch details from employee table excluding employees who are hR or admin
+SELECT * FROM Employee WHERE department NOT IN ('HR', 'Admin');
+
+2.Write a query to fetch all records from employee table order by department in ascending order and salary in
+descending order
+SELECT * FROM Employee ORDER BY department ASC, salary DESC;
+
+3.Write a query to fetch 50% records from employee table
+SELECT * FROM Employee LIMIT (SELECT COUNT(*) FROM Employee) / 2;
+
+4.find the third largest salary from Employee table
+SELECT salary from EMPLOYEE ORDER BY Salary LIMIT 2,1;
+(LIMIT 4,1) - select one row after 4th row ie 5th row
+
+5.Write a query to find the Nth highest salary from the table without using top /limit keyword
+SELECT salary FROM Employee e1 WHERE (N - 1) = ( SELECT COUNT(DISTINCT salary)FROM Employee e2
+    WHERE e2.salary > e1.salary);
+
+    e1.salary: The salary from the outer query.
+    e2.salary: The salary from the inner subquery.
+    COUNT(DISTINCT salary): Counts the number of distinct salaries that are higher than the current salary
+    from the outer query.
+    WHERE (N - 1) = ...: This condition ensures that you find the salary that has exactly N - 1 salaries greater
+    than it. For example, if N = 3, the query finds the salary with exactly 2 salaries greater than it, which is the
+    3rd highest salary.
+
+6.Write a query to find duplicate rows in a table
+SELECT first_name, last_name, department_id, COUNT(*)
+FROM Employees
+GROUP BY first_name, last_name, department_id
+HAVING COUNT(*) > 1;
+
+7.Write a query to calculate the Even and Odd records from a Table
+Select * from employee WHERE MOD(empID,2)=0; // even
+Select * from employee WHERE MOD(empID,2)=1; // odd
+
+8.Write a query to fetch first and last record from the table
+SELECT * from employee WHERE empid=(SELECT MIN(empid) from employee);
+SELECT * from employee WHERE empid=(SELECT MAX(empid) from employee);
+
+10.Copy all rows of employee table using SQL Query
+CREATE TABLE empDetail as SELECT * from employee WHERE 3=4; // it will only copy the schema and not data
+
+11.Write a query to display total salary of each employee after adding 10% increment in salary
+SELECT ID,name, salary+(salary/10) as total_salary from employee;
+
+12.Write a query to retrieve 2 minimum and two maximum salaries
+SELECT DISTINCT salary FROM employee e1 WHERE 2>=(SELECT count DISTINCT salary FROM employee E2 WHERE
+e1.salary >= e2.salary) ORDER BY e1.salary; // MINIUMUM
+
+SELECT DISTINCT salary FROM employee e1 WHERE 2>=(SELECT count DISTINCT salary FROM employee E2 WHERE
+e1.salary <= e2.salary) ORDER BY e1.salary; // MAXIMUM
+
+13. Write a query to retrieve list of employees working in the same department
+SELECT DISTINCT e1.empid ,e1.name, e1.department FROM employee e1, employee e2 where e1.department= e2.department
+AND e1.empID != e2.empID;
+
+14.Write a query to retrieve last three records from employee table
+select * from (select * from employee ORDER BY empid DESC LIMIT 3)temp order by empid ASC;
+
+15. Write a query to retrieve details of employees whose employee name ends with a and contains 5 alphabets
+select * from employee where employee name LIKE '____A'; // 4 times underscore and ends with A
+
+16.Write a query to delete duplicate record from employee table
+DELETE e1 from employee e1, employee E2 where e1.email = e2.email AND e1.id > e2.id;
+
+17.Write a query to retrieve 4 characters of employee name from employee table
+select substring (name,1,4) from employee;
+
+18.Find number of employees whose dob is between first August 1995 to 30th September 1998 and are grouped according to
+gender
+select count(*), gender from employee where DOB between '1995-01-01' and '1998-06-30' group by gender;
+
+
+19.Write a query to fetch employees names and replace " " with "-"
+select replace (name,' ','-') from employee;
+
+20.Create index on table persons
+create index idx_last name on persons (last_name);
+ create unique index <index name> on <table_name> column <column_name>;
+
+21.Create a table
+CREATE TABLE STUDENT(s_id INT(5) PRIMARY KEY,name VARCHAR(255),address VARCHAR(255));
+INSERT INTO STUDENT(s_id,name,address) value (1,"HARSH","PUNE");
+
+22.CREATE VIEW
+CREATE VIEW DetailsView AS SELECT name,address FROM student WHERE s_id<5;
+
+23. To view data from DETAILS view;
+SELECT * FROM DetailsView;
+
+24. Write a query to concatenate three columns, name, salary and email where salary is greater than 10000;
+SELECT CONCAT (name," ",salary," ",email) as concatenated_data FROM Employees where salary>10000;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import java.util.List;
+
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+    // Using a native SQL query to find employees with a salary greater than a specified amount
+    @Query(value = "SELECT * FROM Employee e WHERE e.salary > :salary", nativeQuery = true)
+    List<Employee> findEmployeesWithSalaryGreaterThan(@Param("salary") double salary);
+}
+
+A native query in JPA (Java Persistence API) refers to a SQL query that is written in the database's native SQL
+dialect (specific to the database being used) and is executed directly against the database. Unlike JPQL
+(Java Persistence Query Language), which is object-oriented and database-agnostic, native queries allow developers
+to execute plain SQL queries when more flexibility or performance optimization is needed.
+
+When you need database-specific optimizations.
+If the query is too complex to be expressed in JPQL (e.g., multi-joins, subqueries, database-specific functions).
+When performing bulk operations or raw SQL that cannot easily be represented with JPQL.
+
+
+Defining a Native Query in a Repository:
+java
+Copy code
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+
+    @Query(value = "SELECT * FROM employees WHERE department = ?1", nativeQuery = true)
+    List<Employee> findEmployeesByDepartment(String department);
+}
+
+
+@Query annotation is used with the nativeQuery = true attribute to specify that the query is a native SQL query.
+The query fetches employees from the employees table where the department matches the specified parameter.
+
+@PersistenceContext
+    private EntityManager entityManager;
+
+    public List<Employee> getEmployeesByDepartment(String department) {
+        Query query = entityManager.createNativeQuery("SELECT * FROM employees WHERE department = ?", Employee.class);
+        query.setParameter(1, department);
+        return query.getResultList();
+    }
+}
+Here, createNativeQuery is used to create and execute a native SQL query, and the results are mapped to the Employee entity.

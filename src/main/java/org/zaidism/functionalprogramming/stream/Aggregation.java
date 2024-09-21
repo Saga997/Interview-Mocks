@@ -12,7 +12,8 @@ public class Aggregation {
     List<Employee> employees = getEmployeeList();
 
     // Corrected lambda expressions to compare Employee IDs
-    Employee employeeMaxId = employees.stream().max((e1, e2) -> Integer.compare(e1.getId(), e2.getId())).orElseThrow();
+    Employee employeeMaxId = employees.stream().
+            max((e1, e2) -> Integer.compare(e1.getId(), e2.getId())).orElseThrow();
     System.out.println("Employee With biggest employee ID is: " + employeeMaxId);
 
     Employee employeeMinId = employees.stream().min(Comparator.comparingInt(Employee::getId)).orElseThrow();

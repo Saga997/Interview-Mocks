@@ -1,0 +1,37 @@
+Hypertext Transfer Protocol (HTTP) is an application-layer protocol that allows for the transmission of hypermedia documents
+ like HTML files over the World Wide Web. It's the foundation of data communication on the web, allowing browsers to
+ retrieve web pages from servers and interact with web applications.
+HTTP is a client-server protocol that uses the request/response protocol and runs on top of the TCP/IP family of
+protocols. In HTTP, the client sends a request message to the server, which then collects the requested data and sends
+it back to the client. The connection is then terminated, and the client must re-establish the connection if they
+want more data from the server.
+HTTP has four versions: HTTP/0.9, HTTP/1.0, HTTP/1.1, and HTTP/2.0. The most commonly used HTTP methods are
+POST, GET, PUT, PATCH, and DELETE, which correspond to create, read, update, and delete (CRUD) operations, respectively.
+
+
+
+
+HTTP defines these standard status codes that can be used to convey the results of a client’s request. The status codes are divided into five categories.
+
+1xx: Informational – Communicates transfer protocol-level information.
+2xx: Success – Indicates that the client’s request was accepted successfully.
+200 OK,201 Created,202 Accepted,
+
+3xx: Redirection – Indicates that the client must take some additional action in order to complete their request.
+301 Moved Permanently,302 Found-The URL of the requested resource has been changed temporarily. The new URL is given by
+the Location field in the response. This response is only cacheable if indicated by a Cache-Control or Expires header field.
+
+4xx: Client Error – This category of error status codes points the finger at clients.
+400 Bad Request-The server could not understand the request due to incorrect syntax. The client should NOT repeat the
+request without modifications.
+401 Unauthorized- Indicates that the request requires user authentication information.
+The client MAY repeat the request with a suitable Authorization header field
+403 Forbidden- 	Unauthorized request. The client does not have access rights to the content.
+Unlike 401, the client’s identity is known to the server.
+
+5xx: Server Error – The server takes responsibility for these error status codes.
+500 Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
+502 Bad Gateway - The server got an invalid response while working as a gateway to get the response needed to handle
+the request.
+503 Service Unavailable - The server is not ready to handle the request.
+504 Gateway Timeout - The server is acting as a gateway and cannot get a response in time for a request.

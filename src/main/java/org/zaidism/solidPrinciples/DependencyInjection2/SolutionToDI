@@ -1,0 +1,59 @@
+To adhere to DIP, you can introduce an interface for the email sending functionality:
+
+public interface NotificationService {
+    void sendNotification(String recipient, String content);
+}
+
+public class EmailService implements NotificationService {
+    @Override
+    public void sendNotification(String recipient, String content) {
+        // Code to send email
+        System.out.println("Email sent to " + recipient);
+    }
+}
+
+public class PasswordResetService {
+    private NotificationService notificationService;
+
+    public PasswordResetService(NotificationService notificationService) {
+        this.notificationService = notificationService; // Dependency is injected
+    }
+
+    public void resetPassword(String userEmail) {
+        // Code to reset password
+        notificationService.sendNotification(userEmail, "Your password has been reset.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        NotificationService emailService = new EmailService(); // Choose the implementation
+        PasswordResetService resetService = new PasswordResetService(emailService);
+
+        resetService.resetPassword("user@example.com");
+    }
+}
+
+If you want to switch to an SMS-based notification system:
+
+public class SMSService implements NotificationService {
+    @Override
+    public void sendNotification(String recipient, String content) {
+        // Code to send SMS
+        System.out.println("SMS sent to " + recipient);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        NotificationService smsService = new SMSService(); // Use SMS instead of Email
+        PasswordResetService resetService = new PasswordResetService(smsService);
+
+        resetService.resetPassword("user@example.com");
+    }
+}
+
+Summary
+Dependency Inversion Principle (DIP) focuses on reducing the coupling between high-level modules and low-level modules by introducing abstractions.
+It encourages high-level modules to depend on interfaces (or abstract classes) rather than concrete implementations.
+This makes the system more flexible, maintainable, and easier to test, as different implementations can be swapped in without altering the high-level modules.

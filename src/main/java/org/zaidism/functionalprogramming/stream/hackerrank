@@ -1,0 +1,62 @@
+Here's the implementation of the IZoo interface in a class named Zoo, fulfilling the requirements you specified:
+
+A private variable animalList of type List<Animal> is maintained.
+addAnimal() method adds an animal to the list.
+removeAnimal() removes animals from the list based on their ID.
+countAnimals() counts the number of animals in the list.
+getAnimalsBySpecies() returns a list of animals of a specific species.
+getAnimalsByAge() returns a map where the key is the age, and the value is a list of animals with the same age.
+getQuerySolution(String query) return stream of animals whose names or species have those query
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+class Zoo implements IZoo {
+    // Private list to hold the animals
+    private final List<IAnimal> animalList = new ArrayList<>();
+
+    // Adds an animal to the zoo's list
+    @Override
+    public void addAnimal(IAnimal animal) {
+        animalList.add(animal);
+    }
+
+    // Removes an animal from the zoo by its ID
+    @Override
+    public void removeAnimal(int id) {
+        animalList.removeIf(animal -> animal.getId() == id);
+    }
+
+    // Counts the total number of animals in the zoo
+    @Override
+    public int countAnimals() {
+        return animalList.size();
+    }
+
+    // Returns a list of animals filtered by species
+    @Override
+    public List<IAnimal> getAnimalsBySpecies(String species) {
+        return animalList.stream()
+                .filter(animal -> animal.getSpecies().equalsIgnoreCase(species))
+                .collect(Collectors.toList());
+    ?}
+
+
+    // Returns a map where the key is the animal's age, and the value is a list of animals with that age
+    @Override
+    public List<Map.Entry<Integer, List<IAnimal>>> getAnimalsByAge() {
+        // Grouping animals by age
+        Map<Integer, List<IAnimal>> ageMap = animalList.stream()
+                .collect(Collectors.groupingBy(IAnimal::getAge));
+
+        // Converting the map to a list of entries
+        return new ArrayList<>(ageMap.entrySet());
+    }
+
+    @Override
+        public Stream<IAnimal> getQuerySolution(String query) {
+            return animalList.stream()
+                    .filter(animal -> animal.getName().toLowerCase().contains(query.toLowerCase()) ||
+                                      animal.getSpecies().toLowerCase().contains(query.toLowerCase()));
+        }
+}

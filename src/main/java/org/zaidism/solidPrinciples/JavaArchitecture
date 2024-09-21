@@ -1,0 +1,159 @@
+Java is a Platform Independent language. javac compiles the program to form a bytecode or .class file.
+This file needs a JVM(Java Virtual Machine) file preinstalled in the OS for for execution of the bytecode.
+Although JVM is platform dependent, the bytecode can be created on any System and can be executed in any
+other system despite hardware or software being used which makes Java platform independent.
+
+JIT compiler architecture
+java source Code --> .java file by JDK --> JDK gives the bytecodes --> consumed by JRE
+(Interpreter+JIT compiler) --> produces .class file --> .class consumed by JVMs for linux produces .exe file
+
+Source code is compiled with javac(java compiler) to form bytecode
+Bytecode is further passed on to JVM
+JIT is a part of JVM, JIT is responsible for compiling bytecode into native machine code at run time.
+The JIT compiler is enabled throughout, while it gets activated when a method is invoked. For a compiled method, the JVM directly calls the compiled code, instead of interpreting it.
+As JVM calls the compiled code that increases the performance and speed of the execution.
+
+
+JVM consists of a few memory storages as mentioned below:
+
+Class(Method) Area: stores class-level data of every class such as the runtime constant pool, field, and method data,
+and the code for methods.
+public class ExampleClass {
+    public static final int CONSTANT = 10;
+    public static int staticField = 20;
+
+    public static void staticMethod() {
+        System.out.println("This is a static method.");
+    }
+}
+
+Heap: Objects are created or objects are stored. It is used to allocate memory to objects during run time.
+public class ExampleClass {
+    public static void main(String[] args) {
+        ExampleClass example = new ExampleClass();
+    }
+}
+
+Stack: stores data and partial results which will be needed while returning value for method and performing
+dynamic linking
+public class ExampleClass {
+    public int add(int a, int b) {
+        int result = a + b;
+        return result;
+    }
+
+    public static void main(String[] args) {
+        ExampleClass example = new ExampleClass();
+        int sum = example.add(5, 10);
+    }
+}
+When add() is called, a, b, and result are stored in the stack of the current thread.
+When add() completes, its stack frame is removed from the stack.
+
+
+Program Counter Register: stores the address of the Java virtual machine instruction currently being executed.
+public class ExampleClass {
+    public static void main(String[] args) {
+        int a = 5;
+        int b = 10;
+        int sum = a + b;
+        System.out.println(sum);
+    }
+}
+he PC register will store the address of the instruction currently being executed, such as int sum = a + b;
+
+Native Method Stack: stores all the native methods used in the application
+
+Classloader is the part of JRE(Java Runtime Environment), during the execution of the bytecode or created .class file
+classloader dynamically loads java classes and interfaces to JVM(Java Virtual Machine).Java run time system does not
+need to know about files and file systems.
+
+JVM: JVM also known as Java Virtual Machine is a part of JRE. JVM is interpreter converts bytecode into
+machine-readable code. JVM itself is platform dependent but it interprets the bytecode
+which is the platform-independent reason why Java is platform-independent.
+
+JRE: JRE stands for Java Runtime Environment, it is an installation package provides an environment to run the
+Java program or application on any machine.
+
+JDK stands for Java Development Kit which provides the environment to develop and execute Java programs.
+JDK is a package that includes two things Development Tools to provide an environment to develop your Java programs
+and, JRE to execute Java programs or applications.
+
+Java String Pool is a place in heap memory where all the strings defined in the program are stored.
+ Whenever we create a new string object, JVM checks for the presence of the object in the String pool,
+ If String is available in the pool, the same object reference is shared with the variable, else a new object is created
+
+ if we don’t declare the main as static - we won't get any errors but not be treated as the entry point to the
+ application or the program.
+
+ Packages in Java can be defined as the grouping of related types of classes, interfaces, etc providing access
+ to protection and namespace management.
+
+ Primitive Data Type: Primitive data are single values with no special capabilities.
+ boolean: stores value true or false
+ byte: stores an 8-bit signed two’s complement integer
+ char: stores a single 16-bit Unicode character
+ short: stores a 16-bit signed two’s complement integer
+ int: stores a 32-bit signed two’s complement integer
+ long: stores a 64-bit two’s complement integer
+ float: stores a single-precision 32-bit IEEE 754 floating-point
+ double: stores a double-precision 64-bit IEEE 754 floating-point
+
+ Non-Primitive Data Type: Reference Data types will contain a memory address of the variable’s values because it is
+ not able to directly store the values in the memory. Types of Non-Primitive are mentioned below:
+ Strings,Array,Class,Object,Interface
+
+ The default value of the float is 0.0f and of double is 0.0d in Java.
+
+ Wrapper classes - object class that encapsulates the primitive data types.
+ are final and immutable- used for collections- They are Boolean, Byte, Short, Integer, Character,
+ Long, Float, and Double
+ Provides methods like valueOf(), parseInt(), etc.
+
+ Instance variable - Declared outside the method, directly invoked by the method.Has a default value.can be used t
+ throughout the class.
+ public class Employee {
+     // Instance variables
+     String name;   // Has a default value of null
+     int id;        // Has a default value of 0
+     double salary; // Has a default value of 0.0
+
+     // Constructor to initialize the instance variables
+     public Employee(String name, int id, double salary) {
+         this.name = name;
+         this.id = id;
+         this.salary = salary;
+     }
+
+     // Method to display the employee details
+     public void displayDetails() {
+         System.out.println("Employee Name: " + name);
+         System.out.println("Employee ID: " + id);
+         System.out.println("Employee Salary: $" + salary);
+     }
+
+     public static void main(String[] args) {
+         // Creating an Employee object
+         Employee emp1 = new Employee("John Doe", 123, 50000.00);
+
+         // Invoking the method to display details
+         emp1.displayDetails();
+     }
+ }
+
+The default value for numeric types (byte, short, int, long, float, and double) is 0.
+The default value for the boolean type is false.
+The default value for object types (classes, interfaces, and arrays) is null.
+The null character, “u0000, ” is the default value for the char type
+
+a class variable (also known as a static variable) declared within a class but outside of any method, constructor,
+ or block. with the static keyword, and they are shared by all instances (objects) and class itself.
+
+System.out – It is a PrintStream that is used for writing characters or can be said it can output the data we
+want to write on the Command Line Interface console/terminal.
+System.err – It is used to display error messages.
+System.in – It is an InputStream used to read input from the terminal Window.
+We can’t use the System.in directly so we use Scanner class for taking input with the system.in.
+
+The InputStream is the ancestor class of all possible streams of bytes, it is not useful by itself but all the
+subclasses (like the FileInputStream that you are using) are great to deal with binary data.

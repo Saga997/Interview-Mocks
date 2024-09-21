@@ -1,0 +1,16 @@
+1. Injector
+The injector is the mechanism that figures out how to create and supply the dependencies.
+Angular’s dependency injector is responsible for creating service instances and injecting them into components or
+other services.
+
+2. Provider
+A provider is a way to tell the Angular injector how to create a dependency. Every service you want to
+inject needs to have a provider.
+Providers tell Angular how to obtain or create a service.
+
+3. Token
+A token is a way to uniquely identify a dependency. For services, Angular uses the class as the token.
+
+4. Service
+A service is a class that provides reusable functionality that can be shared across components.
+Angular creates services via the DI system, so services can be injected into other services or components.

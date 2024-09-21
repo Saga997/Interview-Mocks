@@ -1,0 +1,120 @@
+he Comparator and Comparable interfaces in Java are used to compare objects for sorting, but they serve different purposes and are used in different ways. Here's a detailed explanation of the differences between Comparator and Comparable:
+
+1. Comparable Interface
+Purpose: Used to define the natural ordering of objects within the class itself.
+Objects of a class that implements Comparable can be compared to each other using their own defined comparison logic.
+Method: It contains a single method, compareTo(), which must be implemented by the class.
+Usage: Implemented directly by the class whose objects need to be compared.
+Sorting Logic: Defined inside the class, and the comparison logic cannot be changed at runtime.
+Example of Comparable:
+Let's define a Person class that implements Comparable to compare objects by age.
+
+java
+Copy code
+class Person implements Comparable<Person> {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Getter methods
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    // Implementing the compareTo method to compare persons by age
+    @Override
+    public int compareTo(Person other) {
+        return Integer.compare(this.age, other.age); // Sorting by age
+    }
+
+    @Override
+    public String toString() {
+        return "Person{name='" + name + "', age=" + age + "}";
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List<Person> people = new ArrayList<>();
+        people.add(new Person("Alice", 30));
+        people.add(new Person("Bob", 25));
+        people.add(new Person("Charlie", 35));
+
+        // Sorting using Comparable (natural order)
+        Collections.sort(people);
+        System.out.println(people); // Output sorted by age
+    }
+}
+
+
+Comparator Interface
+Purpose: Used to define multiple sorting sequences outside of the class. This allows for comparing objects in
+different ways without modifying their class definition.
+Method: Contains the compare() method, which needs to be implemented to define the sorting logic.
+Usage: Implemented as a separate class, anonymous class, or lambda expression, providing flexibility to change sorting logic at runtime.
+Sorting Logic: Defined outside the object’s class, allowing multiple different sorting criteria for the same objects.
+Example of Comparator:
+Continuing with the Person class, let's use Comparator to sort by both age and name.
+
+java
+Copy code
+import java.util.*;
+
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Getter methods
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{name='" + name + "', age=" + age + "}";
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List<Person> people = new ArrayList<>();
+        people.add(new Person("Alice", 30));
+        people.add(new Person("Bob", 25));
+        people.add(new Person("Charlie", 35));
+
+        // Comparator to sort by name
+        Comparator<Person> byName = (p1, p2) -> p1.getName().compareTo(p2.getName());
+
+        // Comparator to sort by age
+        Comparator<Person> byAge = (p1, p2) -> Integer.compare(p1.getAge(), p2.getAge());
+
+        // Sorting by name
+        Collections.sort(people, byName);
+        System.out.println("Sorted by name: " + people);
+
+        // Sorting by age
+        Collections.sort(people, byAge);
+        System.out.println("Sorted by age: " + people);
+    }
+}
+Key Points of Comparator:
+Multiple Sorting Sequences: Allows multiple sorting logic for the same class.
+Does Not Modify the Class: Sorting logic is external, providing more flexibility.
+Runtime Flexibility: The sorting criteria can be decided at runtime by passing different comparators.

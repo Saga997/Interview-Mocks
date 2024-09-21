@@ -24,6 +24,13 @@ public class Filter {
             .findFirst()
             .orElseThrow();
 
+    // Find the first employee with a salary greater than 60000 and get the name
+    String firstEmpName = employees.stream()
+            .filter(e -> e.getSalary() > 60000.0)
+            .map(Employee::getName) // Map to the employee's name
+            .findFirst()
+            .orElseThrow();
+
     printEmployees(List.of(firstEmpInList), "First Employee in the list is");
 
 
@@ -36,10 +43,18 @@ public class Filter {
 
     // Employee with max salary refer Aggregation.java for better approach
     System.out.println("Employee with max salary: ");
-    double maxSalary = employees.stream().mapToDouble(emp -> emp.getSalary()).summaryStatistics().getMax();
+    double maxSalary = employees.stream().mapToDouble(Employee::getSalary)
+            .summaryStatistics().getMax();
     employees.stream()
             .filter(emp -> emp.getSalary() == maxSalary)
             .toList()
             .forEach(System.out::println);
+
+    employees.stream()
+            .filter(emp -> emp.getSalary() == maxSalary) // Filter employees with max salary
+            .map(Employee::getName)                      // Map to employee names
+            .toList()                                    // Collect to a list (optional)
+            .forEach(System.out::println);               // Print each name
+
   }
 }

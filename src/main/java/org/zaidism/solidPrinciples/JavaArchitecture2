@@ -1,0 +1,97 @@
+To read and write data, Java offers I/O Streams. A Stream represents an input source or an output destination,
+which could be a file, an i/o device, another program, etc. FileInputStream in Java is used to read data from a file
+as a stream of bytes. It is mostly used for reading binary data such as images, audio files, or serialized objects.
+
+File file = new File("path_of_the_file");
+FileInputStream inputStream = new FileInputStream(file);
+
+the FileOutputStream function is used to write data byte by byte into a given file or file descriptor.
+Usually, raw byte data, such as pictures, is written into a file using FileOutputStream.
+File file = new File("path_of_the_file");
+FileOutputStream outputStream = new FileOutputStream(file);
+
+BufferedInputStream and BufferedOutputStream classes
+These both classes provide the capability of buffering which means that the data will be stored in a buffer before
+writing to a file or reading it from a stream. It also reduces the number of times our OS needs to interact with the
+network or the disk
+
+BufferedInputStream(InputStream inp);
+// used to create the bufferinput stream and save the arguments.
+BufferedOutputStream(OutputStream output);
+// used to create a new buffer with the default size.
+
+The Dot operator in Java is used to access the instance variables and methods of class objects.
+It is also used to access classes and sub-packages from the package.
+
+The covariant return type specifies that the return type may vary in the same direction as the subclass.
+It’s possible to have different return types for an overriding method in the child class, but the child’s return
+type should be a subtype of the parent’s return type and because of that overriding method becomes variant with respect to the return type.
+
+Help in preventing run-time ClassCastExceptions on returns.
+
+The transient keyword is used at the time of serialization if we don’t want to save the value of a particular
+variable in a file. When JVM comes across a transient keyword, it ignores the original value of the variable and
+saves the default value of that variable data type.
+
+When an object is serialized, all of its fields are typically serialized as well. However, if a field is marked as
+transient, it will be skipped during serialization. This is useful for fields that are not part of the object's
+persistent state, such as temporary or sensitive information.
+
+import java.io.*;
+
+class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    String username;
+    transient String password; // This field will not be serialized
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Username: " + username + ", Password: " + password;
+    }
+}
+
+public class TransientExample {
+    public static void main(String[] args) {
+        User user = new User("john_doe", "supersecretpassword");
+
+        // Serialize the object
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("user.ser"))) {
+            oos.writeObject(user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Deserialize the object
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("user.ser"))) {
+            User deserializedUser = (User) ois.readObject();
+            System.out.println("Deserialized User: " + deserializedUser);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+String: Once a String object is created, it cannot be modified. Any operation that seems to modify a String
+(like concatenation) actually creates a new String object.which can be memory-intensive and slower, especially in loops
+or when handling large data.Thread-Safe: Being immutable, String is inherently thread-safe.
+Multiple threads can access a String object simultaneously without causing any issues.
+Example:
+String str = "Hello";
+str = str.concat(" World"); // Creates a new String object "Hello World"
+System.out.println(str);    // Outputs "Hello World"
+ the original str object holding "Hello" remains unchanged. A new String object holding "Hello World" is
+ created and str now points to it.
+
+ Mutable: StringBuffer objects can be modified after they are created. Methods like append(), insert(), delete(), etc., modify the content of the StringBuffer object without creating a new object.
+ Example:
+ StringBuffer sb = new StringBuffer("Hello");
+ sb.append(" World"); // Modifies the same StringBuffer object
+ System.out.println(sb);    // Outputs "Hello World"
+ Here, the sb object is directly modified to hold "Hello World" without creating a new object.

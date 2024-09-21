@@ -1,0 +1,68 @@
+Whenever you visit a page on the web, your computer uses the Hypertext Transfer Protocol (HTTP) to
+download that page from another computer somewhere on the Internet.
+
+1: Direct browser to URL- The user either types a Uniform Resource Locator (URL) in the browser
+
+2: Browser looks up IP- URLs into browsers, like "khanacademy.org" and "wikipedia.org". Those domain names map to IP
+addresses, the true location of the domain's computers. That's handled by the Domain Name System.
+IP addresses aren't particularly human-friendly, though. Who wants to memorize an address like 74.125.20.113?
+The domain name system (DNS) gives us humans an easy way to identify where we want to go on the Internet
+domain name like "www.wikipedia.org", and our computer connects us to the computers powering Wikipedia:
+
+3.The browser uses a DNS resolver to map the domain to an IP address:
+
+3: Browser sends HTTP request
+Once the browser identifies the IP address of the computer hosting the requested URL, it sends an HTTP request.
+
+4. Step 4: Host sends back HTTP response
+   Once the host computer receives the HTTP request, it sends back a response with both the content and
+   metadata about it.
+
+Step 5: The browser renders the response
+The browser now has all the information it needs to render the document requested.
+
+GET /index.html HTTP/1.1
+Host: www.example.com
+The first word is the HTTP verb: "GET". There are other verbs for other actions on the web, like submitting
+form data ("POST").The next part specifies the path: "/index.html". The host computer stores the content of the entire
+website, so the browser needs to be specific about which page to load.
+The final part of the first line specifies the protocol and the version of the protocol: "HTTP/1.1".
+The second line specifies the domain of the requested URL. That's helpful in case a host computer stores the content for multiple websites
+
+HTTP/1.1 200 OK
+protocol and version, "HTTP/1.1".,HTTP status code, and in this case, it's 200. That code represents a successful retrieval of the document ("OK").
+
+Headers in HTTP response: The content-type tells the browser what type of document it's sending back.
+A common type on the web is "text/html", as all webpages are HTML text files,images ("image/png"), videos
+("video/mpeg"), script ("application/javascript")
+The content-length gives the length of the document in bytes, how long a file will take to download.
+
+Content-Type: text/html; charset=UTF-8
+Content-Length: 208
+
+Each domain name is made up of parts:
+third-level-domain.second-level-domain.top-level-domain
+There are a limited set of top level domains (TLDs), TLDs,".com", ".org", and ".edu".
+The second level domain is unique to the company or organization that registers it, like "wikipedia" or "khanacademy".
+The third level domain is also called a subdomain, because it's owned by the same group and that URL often directs
+you to a subset of the website, like "m.wikipedia.org" (mobile-optimized Wikipedia) or "es.khanacademy.org"
+
+Behind the scenes, each domain name maps to an IP address. When we type a URL in the address bar
+of our browser, the computer has to figure out its IP address.
+
+If you've visited a website once, there's a fairly good chance you'll visit it again. That's why computers
+keep their own local cache of domain name to IP mappings
+Every ISP provides a domain name resolving service and keeps its own cache. Perhaps you haven't visited a
+particular website, but your neighbor just did, so the ISP can lookup the IP from their visit.
+There are domain name servers scattered around the globe that are responsible for keeping track of a
+subset of the millions of domain names.
+Root name servers → TLD name servers → Host name servers.
+
+The ISP starts by asking the root name servers: "hey, which name server knows about .org domains?"
+The root name server responds with the IP address of a TLD name server that tracks ".org" domains.
+Next, the ISP asks the TLD name server: "so, who knows about wikipedia domains?" The TLD name server
+responds with the IP address of a host name server that contains the "wikipedia" records.
+Finally, the ISP asks the host name server: "okay, so where's www.wikipedia.org?" The host name server
+responds with an exact IP address.
+The ISP sends the IP address back to the requesting computer, and now our computer can successfully
+connect with the computer powering that domain.

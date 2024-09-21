@@ -34,3 +34,33 @@ Exception hierarchy in Java:
  - `Error` represents severe issues that typically cannot be recovered from caused due to lack of resources.
  - `Exception` is further divided into `Checked Exceptions` and `Unchecked Exceptions`.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Checked exceptions are subclasses of the Exception class (except for RuntimeException and its subclasses). These are
+exceptions that a well-written program should anticipate and recover from.
+
+Examples of Checked Exceptions:
+IOException: Thrown when an I/O operation fails, such as reading from a file.
+SQLException: Thrown when a database access error occurs.
+ClassNotFoundException: Thrown when a class is not found at runtime.
+FileNotFoundException: Thrown when a specified file cannot be found.
+
+Checked exceptions must be either caught using a try-catch block or declared using the throws keyword in
+the method signature.
+public void readFile() throws IOException {
+    // Code that might throw IOException
+}
+
+Unchecked exceptions are subclasses of the RuntimeException class. They represent programming errors, such as
+logical mistakes or improper use of an API.
+
+Examples of Unchecked Exceptions:
+NullPointerException: Thrown when trying to use an object reference that has not been initialized.
+ArrayIndexOutOfBoundsException: Thrown when accessing an array with an illegal index.
+ArithmeticException: Thrown when an illegal arithmetic operation is performed, like dividing by zero.
+IllegalArgumentException: Thrown when an illegal or inappropriate argument is passed to a method.
+
+Unchecked exceptions do not need to be explicitly handled or declared.
+They typically occur due to programming mistakes, and the program might not be able to recover from them, although
+it is possible to handle them if desired.
+
+

@@ -1,0 +1,24 @@
+The most commonly used methods in a REST API are,
+PUT- The PUT method updates the resources that are already available on the web server. The PUT method replaces
+everything at the target URL with the provided resource. The PUT method can be used to make a new resource or update an existing one.
+GET - to retrieve data or resources from a server. The server is instructed to fetch and return the requested resource,
+often in the form of an HTTP response, when a client sends a GET request to a particular URI (Uniform Resource Identifier).
+ GET requests are safe and idempotent, they shouldn't have any negative impacts on the server or the resource being accessed.
+
+DELETE
+
+POST-to create or submit data to a server. The server is told to process and save the data contained in the request
+body when a client sends a POST request to a certain URI.
+
+PUT- The PUT method updates the resources that are already available on the web server. The PUT method replaces
+everything at the target URL with the provided resource. used to make a new resource or update an existing one
+
+PUT-Replaces the entire resource with a new representation, sending all the fields of the resource in the request body,
+even if they are not modified.example, a client might send a PUT request to update a user account with a new email address.
+PATCH-Applies partial updates to a resource, sending only the fields that need to be changed in the request body.
+client might use PATCH to update a customer's city. PATCH can save bandwidth because it transfers less data than
+sending the entire record with PUT
+
+OPTIONS
+
+HEAD

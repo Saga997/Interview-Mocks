@@ -1,0 +1,29 @@
+If two strings have same words
+
+Set<String> set1 = Arrays.stream(str1.split(" ")).collect(Collectors.toSet());
+Set<String> set2 = Arrays.stream(str2.split(" ")).collect(Collectors.toSet());
+return set1.equals(set2));
+
+public static boolean haveSameAlphabets(String str1, String str2) {
+        // Convert each string to a Set of Characters
+        Set<Character> set1 = str1.chars()
+                                  .mapToObj(c -> (char) c)
+                                  .collect(Collectors.toSet());
+
+        Set<Character> set2 = str2.chars()
+                                  .mapToObj(c -> (char) c)
+                                  .collect(Collectors.toSet());
+
+        // Compare the sets
+        return set1.equals(set2);
+    }
+
+
+    str1.chars(): Converts the string to an IntStream of character codes (integers representing characters).
+
+    .mapToObj(c -> (char) c): Maps each integer (character code) to its corresponding Character object.
+
+    .collect(Collectors.toSet()): Collects the characters into a Set<Character>, automatically removing any duplicates.
+
+    set1.equals(set2): Compares the two sets. If both sets contain the same characters (ignoring order and duplicates),
+    this will return true.

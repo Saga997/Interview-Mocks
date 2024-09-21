@@ -1,0 +1,26 @@
+1. Find distinct() in an array using strem:
+
+public static int[] findDuplicate(int[] arr)
+{ return Arrays.stream(arr).distinct().sorted().toArray();}
+
+Find duplicates in an array:
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class DuplicateFinder {
+    public static void main(String[] args) {
+        Integer[] numbers = {1, 2, 3, 4, 5, 6, 2, 3, 7, 8, 9, 1};
+
+        // Convert the array to a List to use Stream API
+        List<Integer> duplicates = Arrays.stream(numbers)
+                .collect(Collectors.groupingBy(e -> e, Collectors.counting())) // Group by element and count occurrences
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() > 1) // Filter entries with a count greater than 1
+                .map(Map.Entry::getKey) // Extract the key (the duplicate element)
+                .collect(Collectors.toList()); // Collect the duplicates into a List
+
+        System.out.println("Duplicates: " + duplicates);
+    }
+}
+

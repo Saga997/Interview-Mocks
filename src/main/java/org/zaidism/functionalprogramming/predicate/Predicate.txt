@@ -1,0 +1,15 @@
+Key Points about Predicate:
+
+Functional Interface: Since Predicate is a functional interface, it has only one abstract
+method: test(). This makes it eligible to be used with lambda expressions, method references,
+or anonymous classes.
+
+Method:
+boolean test(T t): Evaluates this predicate on the given argument and returns true if the argument
+matches the predicate condition, otherwise returns false.
+
+Default Methods:
+and(Predicate other): Returns a composed predicate that represents a short-circuiting logical AND of this predicate and another.
+or(Predicate other): Returns a composed predicate that represents a short-circuiting logical OR of this predicate and another.
+negate(): Returns a predicate that represents the logical negation of this predicate.
+isEqual(Object targetRef): Returns a predicate that tests if two arguments are equal according to Objects.equals(Object, Object).

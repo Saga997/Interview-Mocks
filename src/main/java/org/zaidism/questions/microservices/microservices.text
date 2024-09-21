@@ -46,9 +46,21 @@ Additional Features of API Gateway:
 - Load Balancing.
 - CCi Termination.
 
-Circuit Breaker in Microservices (using Hystrix and Resilience4j): refer: https://salithachathuranga94.medium.com/micro-service-patterns-circuit-breaker-with-spring-boot-253e4a829f94
+Circuit Breaker in Microservices (using Hystrix and Resilience4j):
+refer: https://salithachathuranga94.medium.com/micro-service-patterns-circuit-breaker-with-spring-boot-253e4a829f94
 - Ensures service reliability by detecting and preventing failures.
 - Helps services gracefully handle errors and recover from failures.
+
+What is Resilience4j?
+Resilience4j is a lightweight, easy-to-use fault tolerance library inspired by
+Netflix Hystrix. It provides various features.
+
+Circuit Breaker — fault tolerance
+Rate Limiter — block too many requests
+Time Limiter — limit time while calling remote operations
+Retry Mechanism — automatic retry for failed operations
+Bulkhead — limit number of concurrent requests
+Cache — store results of costly remote operations
 
 Distributed Tracing (Spring Cloud Sleuth and Zipkin):
 - Provides insights into how requests flow through the microservices architecture.
@@ -56,7 +68,8 @@ Distributed Tracing (Spring Cloud Sleuth and Zipkin):
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 What are microservices?
 
-    Microservices is an architecture where the application is exposed as loosely coupled services that can be independently developed, deployed, and maintained.
+    Microservices is an architecture where the application is exposed as loosely coupled services that can be
+    independently developed, deployed, and maintained.
 
     Each service exposed is referred to as Microservice. Each service performs a unique function.
 
@@ -158,7 +171,8 @@ Examples of messaging tools based on the Advanced Message Queuing Protocol (AMQP
 - Apache ActiveMQ
 - Amazon Kinesis
 
-These tools facilitate asynchronous communication between microservices, enabling efficient and scalable interactions within a microservices architecture.
+These tools facilitate asynchronous communication between microservices, enabling efficient and scalable
+interactions within a microservices architecture.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Differences between Monolithic, Service-Oriented Architecture (SOA), and Microservices Architecture
 
@@ -211,7 +225,8 @@ Communication Methods Between Microservices:
 1. Synchronous Communication:
    - This involves direct communication where one service waits for a response after sending a request.
    - Examples: Rest APIs, GraphQL, Feign using Eureka discoveries, and GRPC (a faster alternative developed by Google).
-   - Real-world Example: A travel booking system where the flight service communicates with the payment service synchronously to confirm ticket purchases.
+   - Real-world Example: A travel booking system where the flight service communicates with the payment service
+   synchronously to confirm ticket purchases.
 
 2. Asynchronous Communication:
    - In asynchronous communication, services exchange messages through a mediator called a message broker.
@@ -267,23 +282,30 @@ Saga design pattern in the context of transitioning from monolithic to microserv
 
 Why Use the Saga Design Pattern? (Note Only Applicable for Async communication for Sync 2pc and 3pc)
 
-- In monolithic applications, handling transactions is straightforward due to a single database. However, with microservices, where components like order, payment, and
+- In monolithic applications, handling transactions is straightforward due to a single database.
+However, with microservices, where components like order, payment, and
   delivery are separate, managing distributed transactions becomes complex.
-- For instance, consider a scenario where an order is placed, payment is made, but delivery fails. In such cases, traditional transaction rollbacks may not suffice,
+- For instance, consider a scenario where an order is placed, payment is made, but delivery fails.
+In such cases, traditional transaction rollbacks may not suffice,
   resulting in inconsistent states across services.
-- The Saga design pattern addresses this by providing a structured approach to manage distributed transactions, ensuring consistency across microservices even in failure scenarios.
+- The Saga design pattern addresses this by providing a structured approach to manage distributed transactions,
+ensuring consistency across microservices even in failure scenarios.
 
 How Does the Saga Design Pattern Work?
 
 - The Saga pattern orchestrates a sequence of local transactions within microservices, each having its own database.
-- It follows a sequence of steps where each microservice performs its local transaction and triggers the next step by publishing an event.
-- In case of failure at any step, the Saga pattern triggers compensating transactions to rollback changes made by previous steps, maintaining data consistency.
+- It follows a sequence of steps where each microservice performs its local transaction and triggers the next step by
+publishing an event.
+- In case of failure at any step, the Saga pattern triggers compensating transactions to rollback changes
+made by previous steps, maintaining data consistency.
 
 Implementing the Saga Pattern:
 
 - There are two main approaches: choreography and orchestration.
-- Choreography: Microservices exchange events without centralized control, with each service independently executing its local transactions and triggering events for others.
-- Orchestration: A centralized orchestrator coordinates the saga, directing participants on which operations to perform based on events. It handles saga requests,
+- Choreography: Microservices exchange events without centralized control, with each service independently executing
+its local transactions and triggering events for others.
+- Orchestration: A centralized orchestrator coordinates the saga, directing participants on which operations to
+perform based on events. It handles saga requests,
   interprets task states, and manages failure recovery.
 
 Advantages and Disadvantages of Each Approach:

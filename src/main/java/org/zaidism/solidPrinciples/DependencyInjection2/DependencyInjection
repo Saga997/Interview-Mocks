@@ -1,0 +1,27 @@
+Problems:
+
+public class EmailService {
+    public void sendEmail(String recipient, String content) {
+        // Code to send email
+        System.out.println("Email sent to " + recipient);
+    }
+}
+
+public class PasswordResetService {
+    private EmailService emailService;
+
+    public PasswordResetService() {
+        this.emailService = new EmailService(); // Direct dependency on a specific implementation
+    }
+
+    public void resetPassword(String userEmail) {
+        // Code to reset password
+        emailService.sendEmail(userEmail, "Your password has been reset.");
+    }
+}
+
+Tight Coupling: PasswordResetService is tightly coupled to EmailService. If you need to change
+the way emails are sent (e.g., using an SMS service or a different email provider), you'll
+have to modify the PasswordResetService class.
+Difficulty in Testing: Testing PasswordResetService in isolation is difficult because it directly
+depends on EmailService.

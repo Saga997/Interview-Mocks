@@ -1,0 +1,6 @@
+if sorting of objects needs to be based on natural order then use Comparable
+whereas if you sorting needs to be done on attributes of different objects,
+then use Comparator in Java.
+
+The volatile keyword prevents the compiler from performing optimization on code involving volatile objects,
+thus ensuring that each volatile variable assignment and read has a corresponding memory access

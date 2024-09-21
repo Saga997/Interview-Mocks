@@ -1,0 +1,77 @@
+In Java, the Cloneable interface is used to indicate that a class allows its objects to be cloned,
+which means creating a copy of the object. To actually perform the cloning, you need to override the clone() method
+from the Object class. If a class implements Cloneable and the clone() method is correctly overridden, you can create a
+new object that is a copy of the original.
+Otherwise It will throw incompatible CloneNotSupportedException
+
+
+Database has a number of components
+1.Client-client is responsible for crud operations in DB there is a DB server client needs to interact with server
+which runs on the network
+
+2.Network layer -it facilitates communication between DB server and the client sql Lite has an embedded server for it
+in same process just like rest of the system we do send our queries like:select * from table name
+this are,nds first the database understand what are the words that are coming into DB to create to make a complete sense of it
+
+3.Tokeniser-Tokenizer tokenizes the queries into Token to understand what it might mean this or it might mean that
+
+4.Parser - parser process esthe tokens and convert pass it in the output parser which clearly tells what are the
+instructions that need to be performed this token together a valid instruction or not that.parcer's job is to optimize
+do I need to scan all the rose or we can scan just and index of the DB table how can our database response be taken in
+fastest manner or do we need to run some join to run this instruction optimizer job is what's the best possible way to
+run the queries fast and efficient output should be able to understand the white code which other components will understand
+
+5.Execution engine -query execution takes place here
+
+6.Cache management - if we can cache the queries that are coming frequently in the cache manager then the response will
+be faster
+
+7.utility engine- for authentication for security for backup this is being used utility services are being used
+
+8.transaction management - we have to transfer X money from A to B so first we have to reduce A' money from a debited
+and then credit it to B' account DB follows as it property atomicity consistency isolation and durability should have
+some amount of guarantee whether this DB is query is going to be executed or not
+
+9.Lock manager- whether the transaction are taking place properly we can track them through logs locks should be
+in place so that one transaction complete in a good manner we can use shared locks some use exclusive lock some DB is
+take lock over a particular row or a particular document some DB can take law over and entire DB this is done by
+lock Management
+
+10.Recovery management-In between transaction if a crash happens failure happens then how do we recover from that crash
+it is under taken by recovery management in order to handle multiple transaction at the same time be applied locks
+
+11.Concurrency manager
+we need to maintain concurrency which means taking care of multiple transaction at the same time taking lock is just a
+part of concurrency other techniques are
+mvcc that is multiversion concurrency control used by DB lock management is just a part of it dB management must have
+separation of concern so that it can be flexible extensible scale useful principles of system design it is concurrency
+manager and lock manager box together but there is a separation of concern
+
+12.Disk Storage Engine -How is data stored inside disc storage engine takes care of storing the data
+ data is stored in disc in circular tracks rather than in rams as they are expensive disks are cheaper than
+ rams persistence in a cheap way
+ every small component inside the disk is called a page
+
+ 13.Buffer Manager - you cannot manipulate anything on the disk directly
+ you have to bring it into the buffer process it and then put it back into the disc you have to bring the pages into
+ buffer process it using buffer manager
+
+ 14.cache manager processes frequently coming queries a stored here cashing can take place in front end or backend at
+ any levels in a database storage system while buffer managers you have to bring the pages from the desk into the buffer
+  process it fixed size pages from disc like 4kb is the size or so dealing with disc is very costly operation takes a
+  lot of time so how can you make it fast and efficient difference on storage engine how fast your DB is different from
+  speed and efficiency of storage engine so to make this retrieval fast you make sure that you are doing minimum
+  number of trees from the desk in order to fulfill the quiet so hair comes
+
+  15.Index manager:the indexing we need and index manager why do you need Btree indexing we have to deal with disc file
+  operating system place and important role operating system cause are important so we have OS interaction layer system
+  interface we are making system call with whatever OS we are using we cannot store everything in One DB server always
+  available as the amount of data will grow its not possible to store everything in 1 DB server so we need
+  multiple DB service manager this data is going to go on which part of DB
+
+  16.Shard Manager so we need to manage the shards or not so this are all called clusters which have a
+
+  17.Cluster manager - for that so as we can manage this cluster together so there is always availability versus
+  consistancy trade of that is the cap theorem for this we use
+
+  18.Replication manager-which is taken care by replication manager we can handle high scale ability and availability

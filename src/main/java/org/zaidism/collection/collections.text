@@ -2,33 +2,41 @@ Internal Working of HashMap:
 
 HashMapExample.java
 
-The average case complexity of insertions, updates, and deletions in a HashMap is O(1). However, in the worst-case scenario, due to collisions leading to long linked lists,
+The average case complexity of insertions, updates, and deletions in a HashMap is O(1). However,
+in the worst-case scenario, due to collisions leading to long linked lists,
 the complexity degrades to O(n).
 
 How the put() Method Works in HashMap:
 
-When you create a HashMap, initially, 16 buckets are formed (indexed from 0 to 15) in the hash table. Once the threshold index value, which is more than 12 in a HashMap,
-is reached, the bucket size increases. The resizing of the map usually doubles its size from 16 to 32 during debugging.
+When you create a HashMap, initially, 16 buckets are formed (indexed from 0 to 15) in the hash table.
+Once the threshold index value, which is more than 12 in a HashMap,is reached, the bucket size increases.
+The resizing of the map usually doubles its size from 16 to 32 during debugging.
 
 Each index in the bucket acts as a linked list/node with the following structure: [Hashcode|Key|Value|Next].
 
-When the put() method of the HashMap is called, the hash function is invoked on the key object to generate the hash code. Based on this hash code, the index for the first entry
-is calculated using the formula: hashCode & (n-1).
+When the put() method of the HashMap is called, the hash function is invoked on the key object to generate the hash code.
+Based on this hash code, the index for the first entry is calculated using the formula: hashCode & (n-1).
 
-For example, if the index is calculated as 4, a node is created at this index in the bucket with the value [12342|Jahid|1|null].
+For example, if the index is calculated as 4, a node is created at this index in the bucket with the value
+[12342|Jahid|1|null].
 
-If a second entry is added to the map with the key "Amina", and the hash function calculates the same hash code for the key, resulting in the index being 4 again, this situation
+If a second entry is added to the map with the key "Amina", and the hash function calculates the same hash
+code for the key, resulting in the index being 4 again, this situation
 is called a hash collision.
 
-In a hash collision scenario, the equals function is applied to both keys to check if they are not equal. If they are not equal, the new entry is added to the existing entry as
+In a hash collision scenario, the equals function is applied to both keys to check if they are not equal.
+If they are not equal, the new entry is added to the existing entry as
 a linked node: [12342|Jahid|1|1213x] -> [12342|Amina|2|null] at index 4 of the bucket.
 
 If the keys are equal, the existing entry in the map is replaced by the new entry.
 
-If multiple linked lists are formed within the same index, JVM traverses through the linked list, which is not O(1). To address this issue,
-HashMap in Java 8 replaces the linked list with a balanced tree (red-black tree) to improve performance when the number of elements in the bucket reaches a certain threshold.
+If multiple linked lists are formed within the same index, JVM traverses through the linked list, which is not O(1).
+To address this issue,
+HashMap in Java 8 replaces the linked list with a balanced tree (red-black tree) to improve performance when the
+number of elements in the bucket reaches a certain threshold.
 
-If null keys are provided in the HashMap, the corresponding entry in the form of a node is always stored at the 0th index in the bucket of the hash table.
+If null keys are provided in the HashMap, the corresponding entry in the form of a node is always stored at the
+0th index in the bucket of the hash table.
 HashMaps allow only one null key.
 
 While keys can have a null value, values in a HashMap can also be null.
@@ -38,7 +46,8 @@ When the same key is put into the HashMap again, the existing entry is replaced 
 How get method works in hashmap?
 
 - When you use `hashMap.get("Amina")`, the hash function calculates the hashcode for the key "Amina."
-- Using the hashcode, an index is determined within the HashMap's internal array of buckets. This index is calculated as `index = hashCode & (n-1)`.
+- Using the hashcode, an index is determined within the HashMap's internal array of buckets.
+This index is calculated as `index = hashCode & (n-1)`.
 - In the bucket at the calculated index, the HashMap checks if there are one or more entries (nodes) with matching hashcodes.
 - If a matching hashcode is found, the `equals` method is used to check which node's key matches the provided key ("Amina").
 - If a matching key is found within a node, the `get` method returns the corresponding value associated with that key.
@@ -83,8 +92,9 @@ Fail-Fast:
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Why Set doesn't allow duplicate values?
 
-- In Java, for example, the HashSet implementation of the Set interface uses a HashMap internally to store its elements. When you add an element to a HashSet,
-  it is added as a key in the HashMap, with a dummy value. The uniqueness of keys in a HashMap is enforced by the hashing and equality comparison mechanisms.
+- In Java, for example, the HashSet implementation of the Set interface uses a HashMap internally to store its elements.
+When you add an element to a HashSet,it is added as a key in the HashMap, with a dummy value.
+The uniqueness of keys in a HashMap is enforced by the hashing and equality comparison mechanisms.
 
 - Set can contains duplicate elements for custom objects if hashCode and equals methods are not override as per their contract.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -116,21 +126,27 @@ HashMap: not thread safe, fail fast, allow storing null keys and values, faster 
 ConcurrentHashMap: thread safe, fail safe, doesn't allow storing null keys and values, slower than HashMap
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 We Can Synchronize a HashMap using Collections then why can't we use that instead using ConcurrentHashMap?
-Ans : if we used Collections.synchronizedMap(map) it will act as a synchronized Hashtable only where again locking mechanism is different
+Ans : if we used Collections.synchronizedMap(map) it will act as a synchronized Hashtable only where again
+locking mechanism is different
 Refer: ConcurrentHashMapvsHashTable.jpg
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-The choice between TreeMap and HashMap in Java depends on the specific requirements and characteristics of your application. Here are some considerations:
+The choice between TreeMap and HashMap in Java depends on the specific requirements and characteristics of your
+application. Here are some considerations:
 
 1. Ordering:
-   - TreeMap: Elements are stored in sorted order based on their keys. If you need the elements to be sorted according to the natural order of the keys or a custom comparator,
+   - TreeMap: Elements are stored in sorted order based on their keys. If you need the elements to be sorted according
+   to the natural order of the keys or a custom comparator,
    TreeMap is the appropriate choice.
    - HashMap: Elements are not ordered. If the order of elements is not important or if you need faster insertion, deletion, and retrieval of elements without considering their order,
    HashMap is more suitable.
 
 2. Performance:
-   - TreeMap: Insertion, deletion, and retrieval operations have a time complexity of O(log n) due to the underlying Red-Black Tree structure used for maintaining sorted order.
-    This makes TreeMap suitable for scenarios where the number of elements is relatively small or where the need for sorted order outweighs performance concerns.
-   - HashMap: In general, insertion, deletion, and retrieval operations have an average time complexity of O(1) (constant time). HashMap provides better performance for large
+   - TreeMap: Insertion, deletion, and retrieval operations have a time complexity of O(log n) due to the underlying
+   Red-Black Tree structure used for maintaining sorted order.
+    This makes TreeMap suitable for scenarios where the number of elements is relatively small or where the need
+    for sorted order outweighs performance concerns.
+   - HashMap: In general, insertion, deletion, and retrieval operations have an average time complexity of O(1)
+   (constant time). HashMap provides better performance for large
     datasets or scenarios where order is not a concern.
 
 3. Memory Overhead:

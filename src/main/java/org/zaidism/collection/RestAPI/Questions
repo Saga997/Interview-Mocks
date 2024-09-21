@@ -1,0 +1,149 @@
+1.What is REST
+Representational State Transfer specifies constraints, uniform interface if applied to web service  induce desirable
+properties accessed using Uniform Resource Locator(URI)
+APIs are used - way for 2 computers to communicate with each other. Client will sent the request and Server will
+send a response
+Rest is loose set of instructions: Uniform iterface, client-server, stateless,Layered system Ex. Google Maps,
+We have @Entity class which is persisted in DB , @Data, @Id GeneratedValue(strategy=GenerationType.SEQUENCE)
+@Column(name="id",nullable=false) private int id; private String name;
+
+Ex - Postman is our client , hitting URL : http://localhost:8081/controller/id/1
+{ "id" :1,
+  "name" : "code"
+  }   // This is Json view of our object in DBTable. This is the state of my employee which is a record in our DB
+  and I am tansferring this state of the object (can be in XML format)over the HTTP protocol which is returned to client
+Client(Postman) uses interface REST API to connect with server which fetched data from the DB - this is called messaging
+
+Stateless: Restful web svc should not keep client state on server . It's client responsibilty to pass is context
+to server and server can store this context to process client's further request. Everytime you hit the server the headers
+headers have to be passed . You can expect it to be passed from ealier
+
+Addressing: Process of locating various resources using URL. sinle or multiple resources addressed by resources
+Scalable: because of statelessness no info on server
+Idempotent method: return same outcome even after same req has been made multiple times
+Tools: Swagger, Postman : inspect query headers, response headers documentation of endpoint , conversion of endpoints
+to XML, JSON
+
+Important aspects : ResourcesRequest, Headers, Request Body, response Body, Status Codes
+
+Let’s break down the components of a URL:
+
+Scheme: It indicates the protocol or scheme used to access the resource, such as HTTP (Hypertext Transfer Protocol),
+ HTTPS (HTTP Secure), FTP (File Transfer Protocol), or others.
+For example, in http://www.example.com:8080/resource/page.html?param1=value1&param2=value2#section1, the Scheme is http
+.
+Host: It specifies the domain name or IP address of the server hosting the resource.
+For example, in http://www.example.com:8080/resource/page.html?param1=value1&param2=value2#section1,
+the Host is www.example.com.
+
+Port: (Optional) It represents the specific port number on the host that the resource is accessed through.
+If no port is specified, it defaults to the standard port for the given scheme. The default port for HTTP is 80,
+while for HTTPS it is 443.
+For example, in http://www.example.com:8080/resource/page.html?param1=value1&param2=value2#section1, the Port is 8080.
+
+Path: (Optional) It denotes the specific location or directory on the server where the resource is located.
+It can include directories and file names. For example, in
+http://www.example.com:8080/resource/page.html?param1=value1&param2=value2#section1, the Path is /resource/page.html.
+
+Query Parameters: (Optional) They are additional parameters passed to the resource and are typically used in dynamic web
+ applications. They appear after the path and are separated by the ? symbol. Query parameters are in the form of
+ key-value pairs, like param1=value1&param2=value2.
+For example, in http://www.example.com:8080/resource/page.html?param1=value1&param2=value2#section1,
+the Query Parameters are param1=value1&param2=value2.
+
+Fragment Identifier: (Optional) It refers to a specific section or anchor within a webpage.
+The fragment identifier is indicated by the # symbol, followed by the identifier. It is commonly used to link to a
+specific section of a webpage.
+For example, in http://www.example.com:8080/resource/page.html?param1=value1&param2=value2#section1,
+the Fragment Identifier is #section1.
+
+Open API
+Also called public APIs, these are your completely public access APIs, with no restrictions on who can use them.
+Businesses often favor these as they allow third parties to introduce new and innovative ideas to improve user experience.
+Another example is Google Maps. Their open API not only allows Maps integration with third parties.
+Game developers can use realistic terrain in their designs
+
+Partner API
+These types of API is not open to the public, and access is restricted through the use of specific licenses.
+Business partners often make use of these APIs. For example, you will see them used between a business and its client
+as part of a paid online service.If you are a developer wanting to access Pinterest data services by way of APIs,
+you must submit a request to Pinterest outlining how you will use the API. If Pinterest deems your request appropriate,
+you will be granted partner API access.
+
+Private API
+Also called internal APIs or enterprise APIs, private APIs are types of APIs that are used only within a single company.
+ These are often used to integrate different company services and streamline workflows.
+
+Representational State Transfer (REST) is an HTTP-based protocol that uses HTTP/HTTPS to access resources and implement
+ basic operations. These operations are called verbs and are defined using four basic HTTP operations:
+GET: Read
+POST: Write
+PUT/PATCH: Update
+DELETE: Delete
+REST is a standard for many applications, including web services, Software as a Service (SaaS), distributed systems,
+cloud-based services, and other business applications. REST APIs can have many endpoints, unlike SOAP APIs, which have only one
+
+
+URI stands for Uniform Resource Identifier. URI is a sequence of characters used to identify a resource location or a
+name or both over the World Wide Web. A URI can be further classified as a locator, a name, or both.
+
+Let’s break down the components of a URL:
+
+Scheme: It indicates the protocol or scheme used to access the resource, such as HTTP (Hypertext Transfer Protocol),
+ HTTPS (HTTP Secure), FTP (File Transfer Protocol), or others.
+For example, in http://www.example.com:8080/resource/page.html?param1=value1&param2=value2#section1, the Scheme is http
+.
+Host: It specifies the domain name or IP address of the server hosting the resource.
+For example, in http://www.example.com:8080/resource/page.html?param1=value1&param2=value2#section1,
+the Host is www.example.com.
+
+Port: (Optional) It represents the specific port number on the host that the resource is accessed through.
+If no port is specified, it defaults to the standard port for the given scheme. The default port for HTTP is 80,
+while for HTTPS it is 443.
+For example, in http://www.example.com:8080/resource/page.html?param1=value1&param2=value2#section1, the Port is 8080.
+
+Path: (Optional) It denotes the specific location or directory on the server where the resource is located.
+It can include directories and file names. For example, in
+http://www.example.com:8080/resource/page.html?param1=value1&param2=value2#section1, the Path is /resource/page.html.
+
+Query Parameters: (Optional) They are additional parameters passed to the resource and are typically used in dynamic web
+ applications. They appear after the path and are separated by the ? symbol. Query parameters are in the form of
+ key-value pairs, like param1=value1&param2=value2.
+For example, in http://www.example.com:8080/resource/page.html?param1=value1&param2=value2#section1,
+the Query Parameters are param1=value1&param2=value2.
+
+Fragment Identifier: (Optional) It refers to a specific section or anchor within a webpage.
+The fragment identifier is indicated by the # symbol, followed by the identifier. It is commonly used to link to a
+specific section of a webpage.
+For example, in http://www.example.com:8080/resource/page.html?param1=value1&param2=value2#section1,
+the Fragment Identifier is #section1.
+
+
+URN
+URN (Uniform Resource Name) is a type of URI (Uniform Resource Identifier) that is used to uniquely identify a
+resource, independent of its location. Unlike a URL, which specifies the address or location of a resource, a URN
+provides a persistent identifier that remains unchanged even if the resource is moved or its location changes
+
+URN: Indicates that the identifier is a Uniform Resource Name.
+Namespace: Represents the unique namespace or identifier system that defines and governs the URN. It provides context
+and ensures the uniqueness of the identifier. Examples of namespaces include ISBN (International Standard Book Number)
+or ISSN (International Standard Serial Number).
+Identifier: It is a string of characters that uniquely identifies the resource within the specified namespace.
+The identifier itself does not convey any information about the location or access method for the resource.
+
+6. What is URI?
+A URI, or Uniform Resource Identifier, is a short collection of characters that is used to identify and find resources
+ on the internet or inside of a network. Users and apps can access files, web pages, and other online material thanks
+ to URIs, which act as distinctive addresses for resources.
+When identifying resources, URNs (Uniform Resource Names) offer a permanent and location-independent identity
+and online navigation.
+
+The critical characteristics of REST are,
+We cannot start the server between two calls in a well-defined REST API.
+The REST uses the GET method to access the resources, whereas Web Services use the POST method to make operations.
+REST is stateless. Stateless means that the REST API server has no session data.
+
+The volatile keyword prevents the compiler from performing optimization on code involving volatile objects,
+thus ensuring that each volatile variable assignment and read has a corresponding memory access
+
+

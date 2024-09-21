@@ -1,0 +1,44 @@
+HashMap
+Performs best in single-threaded environments, but it's not thread-safe. This means that it can cause threads to get
+stuck in an infinite loop, which can make your application's CPU spike. HashMaps also have a fixed-size array that
+needs to be resized when it reaches a certain threshold.
+ConcurrentHashMap
+Thread-safe and slightly slower than HashMap, but it's good for multi-threading. ConcurrentHashMaps are more complex
+than Hashtables, and they use an array of segments that's essentially a separate Hashtable. This allows them to
+perform some operations at the same time, but it also uses more memory.
+Hashtable
+Thread-safe, but it's 18 times slower than HashMap in some test scenarios. Hashtables use a simple data structure
+that's essentially an array of linked lists, with each bucket storing a key-value pair. This means that Hashtables
+consume less memory overall, but they don't have any internal data structures to manage concurrency level or other
+advanced functionalities
+
+Function is a functional interface in Java that takes input of type 'T' and produces an output of type 'R'.
+In functional programming, functions are first-class citizens, meaning that they can be passed around as values,
+stored in variables or data structures, and used as arguments or return values of other functions.
+
+The Java Input/Output (I/O) is a part of java.io package. This package contains a relatively large number of classes
+that support input and output operations. These classes may be categorized into groups based on the data type on which
+they operate.
+
+In Java, a Stream is a sequence of data that you can process in a declarative and functional style. It allows you to
+perform operations such as filtering, mapping, and reducing on a collection of data. Streams can be used with various
+data sources, including arrays, collections, and even I/O channels
+
+flatMap() is a method used in functional programming and stream processing to transform and flatten collections or
+streams. It combines the operations of mapping and flattening, taking a function that maps each element to a stream
+and then flattens the resulting streams into a single stream.
+
+In simpler terms, flatMap() is useful when you have a collection of collections and you want to process each element
+and then combine the results into a single collection.
+
+2. Flattening
+Flattening is the process of converting a structure of nested collections (e.g., a list of lists) into a single
+collection (e.g., a single list). This process removes one level of nesting.
+
+3. Where Can We Use flatMap()?
+Stream Processing: When dealing with streams of collections in Java, flatMap() can be used to transform and
+flatten streams in one step.
+Nested Collections: When you have a collection of collections (like a list of lists) and you want to
+process and combine all the elements into a single collection.
+Optional and Monads: flatMap() is used in monadic contexts like Optional, where you need to unwrap and
+process the contained value and then possibly return another monad

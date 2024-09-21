@@ -1,67 +1,134 @@
-1. What is Angular?
+    1. What is Angular?
    - Angular is a framework for building single-page client applications using HTML and TypeScript. It's managed by Google and offers long-term support.
    Angular is primarily written in TypeScript.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 2. What is Angular CLI?
-   - Angular CLI is a command-line interface tool used for initializing, developing, scaffolding, and maintaining Angular applications directly from a command shell.
+   - Angular CLI is a command-line interface tool used for initializing, developing, scaffolding, and maintaining
+   Angular applications directly from a command shell.
    You can install Angular CLI using the command: `npm install -g @angular/cli`.
-Lifecycle hooks in Angular are special methods that are automatically called at certain points in the lifecycle of a component. These hooks allow you to perform custom actions or logic at specific times during the component's lifecycle. Here's a breakdown of some common lifecycle hooks:
+Lifecycle hooks in Angular are special methods that are automatically called at certain points in the lifecycle of
+a component. These hooks allow you to perform custom actions or logic at specific times during the component's
+lifecycle.
+Here's a breakdown of some common lifecycle hooks:
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 What are lifecycle hooks in Angular?
 
-1. `ngOnInit`: This hook is called after Angular has initialized the component's data-bound properties and set the component's input properties.
+1. `ngOnInit`: This hook is called after Angular has initialized the component's data-bound properties and set the
+component's input properties.
    It's often used for initialization logic.
+'
+'2. `ngOnChanges`: This hook is called whenever one or more of the component's input properties change. It's useful for
+reacting to changes in input data.
 
-2. `ngOnChanges`: This hook is called whenever one or more of the component's input properties change. It's useful for reacting to changes in input data.
+3. `ngDoCheck`: This hook is called during every change detection cycle and can be used to detect and
+act upon changes that Angular can't or won't detect on its own.
 
-3. `ngDoCheck`: This hook is called during every change detection cycle and can be used to detect and act upon changes that Angular can't or won't detect on its own.
+4. `ngAfterContentInit`: This hook is called after Angular has projected external content into the
+component's view, or into the view that a directive is in.
 
-4. `ngAfterContentInit`: This hook is called after Angular has projected external content into the component's view, or into the view that a directive is in.
+5. `ngAfterContentChecked`: This hook is called after Angular has checked the content projected into the component
+or directive.
 
-5. `ngAfterContentChecked`: This hook is called after Angular has checked the content projected into the component or directive.
+6. `ngAfterViewInit`: This hook is called after Angular has initialized the component's views and child views,
+or the view that contains the directive.
 
-6. `ngAfterViewInit`: This hook is called after Angular has initialized the component's views and child views, or the view that contains the directive.
+7. `ngAfterViewChecked`: This hook is called after Angular has checked the component's views and child views,
+or the view that contains the directive.
 
-7. `ngAfterViewChecked`: This hook is called after Angular has checked the component's views and child views, or the view that contains the directive.
+8. `ngOnDestroy`: This hook is called just before Angular destroys the component or directive. It's commonly used
+for cleanup tasks such as unsubscribing from observables or detaching event handlers.
 
-8. `ngOnDestroy`: This hook is called just before Angular destroys the component or directive. It's commonly used for cleanup tasks such as unsubscribing from observables or
-detaching event handlers.
-
-These lifecycle hooks provide developers with the ability to hook into various stages of a component's lifecycle and perform tasks such as initialization,
+These lifecycle hooks provide developers with the ability to hook into various stages of a component's
+lifecycle and perform tasks such as initialization,
 cleanup, or reacting to changes in input data.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 8. What are components in Angular?
-   - Components are the main building blocks of Angular applications. They consist of an HTML template, TypeScript class, and CSS selectors. Components can be standalone or
+   - Components are the main building blocks of Angular applications. They consist of an HTML template,
+   TypeScript class, and CSS selectors. Components can be standalone or
     module-based and are created using the Angular CLI command `ng generate component <component-name>`.
+
+    import { Component } from '@angular/core';
+
+    @Component({
+      selector: 'app-my-component',
+      templateUrl: './my-component.component.html',
+      styleUrls: ['./my-component.component.css']
+    })
+    export class MyComponentComponent {
+      title = 'Hello, Angular Component!';
+      message = 'Welcome to the Angular world!';
+
+      // Method to change the message
+      changeMessage(newMessage: string): void {
+        this.message = newMessage;
+      }
+    }
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 10. What is a module in Angular?
-    - A module is a mechanism to group components, directives, pipes, and services related to each other. Modules can be combined with other modules to create an application.
+    - A module is a mechanism to group components, directives, pipes, and services related to each other.
+    Modules can be combined with other modules to create an application.
     Angular applications can have multiple modules, defined using the `@NgModule` decorator.
+
+ng generate module user
+UserModule (user.module.ts): Below is an example of what the module file might look like.
+
+// user.module.ts
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { UserComponent } from './user.component';
+import { UserDetailComponent } from './user-detail.component';
+import { UserService } from './user.service';
+
+@NgModule({
+  declarations: [
+    UserComponent,         // Declare components, directives, and pipes
+    UserDetailComponent
+  ],
+  imports: [
+    CommonModule,          // Import other modules
+    FormsModule
+  ],
+  providers: [UserService], // Register services
+  exports: [UserComponent]  // Export components to be used in other modules
+})
+export class UserModule { }
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 11. What is a directive in Angular?
 
-In Angular, directives are special classes that allow you to add extra functionality or behavior to HTML elements in your application.
+In Angular, directives are special classes that allow you to add extra functionality or behavior to HTML elements
+in your application.
 
 There are three main types of directives:
 
-Components: Components are the most common type of directive in Angular. They are essentially directives with a template.
-A component consists of a TypeScript class and an HTML template that define the behavior and appearance of a custom HTML element.
+Components: Components are the most common type of directive in Angular. They are essentially directives with a
+template.A component consists of a TypeScript class and an HTML template that define the behavior and appearance
+of a custom HTML element.
 
 Structural Directives: Structural directives are used to change the structure of the DOM (Document Object Model).
-They are responsible for adding or removing elements from the DOM based on certain conditions. Examples of structural directives include ngIf, ngFor, and ngSwitch.
+They are responsible for adding or removing elements from the DOM based on certain conditions.
+Examples of structural directives include ngIf, ngFor, and ngSwitch.
 
-Attribute Directives: Attribute directives are used to change the appearance or behavior of existing HTML elements by applying special attributes to them.
-These directives modify the element's behavior or appearance without changing its structure. Examples of attribute directives include ngClass, ngStyle, and ngModel.
+Attribute Directives: Attribute directives are used to change the appearance or behavior of existing HTML elements
+by applying special attributes to them.
+These directives modify the element's behavior or appearance without changing its structure.
+Examples of attribute directives include ngClass, ngStyle, and ngModel.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 12. What are pipes in Angular and how to create custom pipe?
 
-In Angular, pipes are like filters that change how data looks when it's displayed on the screen. They're handy for transforming values into different formats.
- For example, you can use a pipe to format a date, convert text to uppercase or lowercase, or display numbers in a specific way.
+In Angular, pipes are like filters that change how data looks when it's displayed on the screen.
+They're handy for transforming values into different formats.
+ For example, you can use a pipe to format a date, convert text to uppercase or lowercase, or display numbers
+ in a specific way.
 
-Angular comes with built-in pipes that cover common formatting needs, such as `DatePipe` for dates, `UpperCasePipe` for uppercase text, `LowerCasePipe` for lowercase text,
-`CurrencyPipe` for currency formatting, `DecimalPipe` for decimal numbers, and `PercentPipe` for displaying numbers as percentages.
+Angular comes with built-in pipes that cover common formatting needs, such as `DatePipe` for dates,
+`UpperCasePipe` for uppercase text, `LowerCasePipe` for lowercase text,
+`CurrencyPipe` for currency formatting, `DecimalPipe` for decimal numbers, and `PercentPipe` for displaying
+numbers as percentages.
 
-To create a custom pipe, you can use Angular's `Pipe` decorator along with a TypeScript class. Here's a simple example:
+To create a custom pipe, you can use Angular's `Pipe` decorator along with a TypeScript class.
+Here's a simple example:
 
 import { Pipe, PipeTransform } from '@angular/core';
 
@@ -78,7 +145,8 @@ export class ReversePipe implements PipeTransform {
 
 In the above example:
 - We've created a custom pipe called `ReversePipe` using the `@Pipe` decorator.
-- The `transform` method of the `PipeTransform` interface is implemented to define how the transformation should be applied.
+- The `transform` method of the `PipeTransform` interface is implemented to define how the transformation
+should be applied.
 - Inside the `transform` method, we take a string input (`value`) and return its reversed version.
 
 After defining the custom pipe, you can use it in your templates like any other built-in pipe:
@@ -87,23 +155,41 @@ After defining the custom pipe, you can use it in your templates like any other 
 
 
 This will display the text "olleh" instead of "hello" because the `ReversePipe` reverses the string.
+
+
+What are forms in angular?
+ forms are used to capture user input and provide a way to interact with data. Angular provides two main types
+ of forms: Reactive Forms and Template-Driven Forms. Both approaches allow for form validation, binding, and
+ handling user input but differ in their structure and approach.
+
+1. Reactive Forms
+Reactive Forms are model-driven, meaning the form model is defined in the component class and
+synchronized with the form controls in the template.
+They provide more control and flexibility, especially for complex forms.
+2. Template-Driven Forms
+Template-Driven Forms are less complex and rely on directives in the template to create and manage forms.
+They are ideal for simple forms and quick prototyping.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 19. What is two-way binding in Angular?
-    - Two-way binding in Angular enables components to share data bidirectionally. It combines event and property binding, allowing changes in the UI to update
+    - Two-way binding in Angular enables components to share data bidirectionally.
+    It combines event and property binding, allowing changes in the UI to update
     the component's data model and vice versa. Syntax: `[()]`. Example: `<app-sizer [(size)]="fontSizePx"></app-sizer>`.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 20. What are services in Angular?
-    - Services in Angular provide a way to separate application data and functions that can be used by multiple components. They promote reusability by
-    allowing code to be injected into any component or directive. Services are often used for consuming external APIs using `HttpClient`.
+    - Services in Angular provide a way to separate application data and functions that can be used by
+    multiple components. They promote reusability by
+    allowing code to be injected into any component or directive. Services are often used for consuming
+    external APIs using `HttpClient`.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 21. What is an HTTP Interceptor in Angular?
 
-In Angular, an HTTP Interceptor is a feature that allows you to intercept outgoing HTTP requests and incoming HTTP responses.
-It provides a way to perform various tasks related to these requests and responses, such as modifying headers, handling errors, logging information,
-adding authentication tokens, and more.
+In Angular, an HTTP Interceptor is a feature that allows you to intercept outgoing HTTP requests and incoming
+HTTP responses.It provides a way to perform various tasks related to these requests and responses,
+such as modifying headers, handling errors, logging information,adding authentication tokens, and more.
 
-HTTP Interceptors are useful for implementing cross-cutting concerns in your application, such as adding authorization tokens to requests, handling authentication errors,
-or logging requests and responses for debugging purposes.
+HTTP Interceptors are useful for implementing cross-cutting concerns in your application, such as
+adding authorization tokens to requests, handling authentication errors,or logging requests and
+responses for debugging purposes.
 
 Here's a simple example of how to create an HTTP Interceptor in Angular:
 
@@ -136,8 +222,10 @@ export class AuthInterceptor implements HttpInterceptor {
 In this example:
 - We create a class `AuthInterceptor` that implements the `HttpInterceptor` interface.
 - We implement the `intercept` method, which is called for each HTTP request.
-- Inside the `intercept` method, we modify the request by adding an authorization token to the request headers using the `clone` method to avoid mutating the original request.
-- Finally, we pass the modified request to the `next.handle` method, which allows the request to continue its journey through any remaining interceptors or to the `HttpClient`.
+- Inside the `intercept` method, we modify the request by adding an authorization token to the request headers
+using the `clone` method to avoid mutating the original request.
+- Finally, we pass the modified request to the `next.handle` method, which allows the request to continue its
+journey through any remaining interceptors or to the `HttpClient`.
 
 To use this interceptor, you need to provide it in your Angular module:
 
@@ -157,12 +245,15 @@ import { AuthInterceptor } from './auth.interceptor';
 })
 export class AppModule {}
 
-With this setup, the `AuthInterceptor` will intercept all outgoing HTTP requests and add the authorization token to their headers before they are sent.
+
+With this setup, the `AuthInterceptor` will intercept all outgoing HTTP requests and add the authorization token to
+their headers before they are sent.
 This is just one example of how you can use HTTP Interceptors in Angular to implement various HTTP-related tasks.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 22. How to pass headers in Angular services?
 
-In Angular, passing headers in services can be done directly within the service itself or globally for all requests using HTTP interceptors.
+In Angular, passing headers in services can be done directly within the service itself or globally for all requests
+using HTTP interceptors.
 
 1. Passing Headers Directly in Services:
 
@@ -197,7 +288,8 @@ In this example:
 
 2. Using HTTP Interceptors to Pass Headers Globally:
 
-Alternatively, you can use HTTP interceptors to pass headers globally for all HTTP requests in your Angular application. Here's how:
+Alternatively, you can use HTTP interceptors to pass headers globally for all HTTP requests in your
+Angular application. Here's how:
 
     import { Injectable } from '@angular/core';
     import {
@@ -249,8 +341,10 @@ To use the interceptor globally, you need to provide it in your Angular module:
     })
     export class AppModule { }
 
-With this setup, the `AuthInterceptor` will intercept all outgoing HTTP requests and add the authorization token to their headers before they are sent.
- This approach ensures that the headers are applied automatically to all requests without the need to manually specify them in each service method.
+With this setup, the `AuthInterceptor` will intercept all outgoing HTTP requests and add the authorization token to
+their headers before they are sent.
+ This approach ensures that the headers are applied automatically to all requests without the need to manually specify
+ them in each service method.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 32. How to pass data from one component to another in Angular?
     - Data can be passed from one component to another using various methods:
@@ -261,24 +355,31 @@ With this setup, the `AuthInterceptor` will intercept all outgoing HTTP requests
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 43. What is RxJS?
 
-In simple terms, RxJS, which stands for Reactive Extensions for JavaScript, is a library that helps developers work with asynchronous data streams
-in a more manageable and organized way. It's particularly useful for handling events, managing UI interactions, and dealing with data over time.
+In simple terms, RxJS, which stands for Reactive Extensions for JavaScript, is a library that helps
+developers work with asynchronous data streams in a more manageable and organized way. It's particularly useful
+for handling events, managing UI interactions, and dealing with data over time.
 
 Here's a breakdown of what RxJS does:
 
-1. Reactive Programming: RxJS enables reactive programming, which means writing code that reacts to changes and events as they occur.
-This is particularly useful in web development where events such as mouse clicks, HTTP requests, and data updates happen asynchronously.
+1. Reactive Programming: RxJS enables reactive programming, which means writing code that reacts to changes
+and events as they occur. This is particularly useful in web development where events such as mouse clicks,
+HTTP requests, and data updates happen asynchronously.
 
 2. Observables: RxJS introduces the concept of observables, which are like streams of data that you can listen to.
-Observables can emit multiple values over time, making them suitable for handling asynchronous operations such as HTTP requests or user interactions.
+Observables can emit multiple values over time, making them suitable for handling asynchronous operations such as
+HTTP requests or user interactions.
 
-3. Simplifies Asynchronous Code: RxJS simplifies working with asynchronous operations by providing a set of powerful operators that allow
-you to transform, filter, combine, and manipulate data streams easily. This makes it easier to write asynchronous code that is more readable, maintainable, and composable.
+3. Simplifies Asynchronous Code: RxJS simplifies working with asynchronous operations by providing a set of
+powerful operators that allow
+you to transform, filter, combine, and manipulate data streams easily. This makes it easier to write asynchronous
+code that is more readable, maintainable, and composable.
 
-4. Event Handling: RxJS makes it easy to handle events and manage UI interactions in a reactive and declarative way. Instead of manually adding
+4. Event Handling: RxJS makes it easy to handle events and manage UI interactions in a reactive and declarative way.
+Instead of manually adding
 event listeners and managing callbacks, you can use observables to represent events and react to them using operators.
 
-In essence, RxJS provides a set of tools and abstractions for working with asynchronous data streams, making it easier to build reactive and responsive applications.
+In essence, RxJS provides a set of tools and abstractions for working with asynchronous data streams,
+making it easier to build reactive and responsive applications.
 
 Here's a simple example of using RxJS to handle mouse click events:
 
@@ -297,37 +398,45 @@ In this example:
 - We subscribe to the `clicks$` observable to listen for click events.
 - Whenever a click event occurs, the subscribed function logs the mouse coordinates to the console.
 
-RxJS simplifies handling asynchronous events like these by providing a consistent and powerful API for working with observables and data streams.
+RxJS simplifies handling asynchronous events like these by providing a consistent and powerful API
+for working with observables and data streams.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 45. What is an Observable? Observable vs promises.
 
 Promises:
 
 - A Promise deals with a single event that happens when an async operation finishes or fails.
-- Promises don't support cancellation in native JavaScript (ES6 Promise), although there are libraries that provide this feature.
+- Promises don't support cancellation in native JavaScript (ES6 Promise), although there are libraries that
+provide this feature.
 
 Observables:
 
 - An Observable is like a stream where you can have zero or more events, and a callback is called for each event.
-- Observables are preferred over Promises because they offer more features. You can handle 0, 1, or multiple events with the same API.
-- Observables can be cancelled, which means you can stop receiving notifications or results from an ongoing async operation if you no longer need them.
+- Observables are preferred over Promises because they offer more features. You can handle 0, 1, or multiple events
+with the same API.
+- Observables can be cancelled, which means you can stop receiving notifications or results from an
+ongoing async operation if you no longer need them.
 - Unlike Promises that start immediately, Observables only start when you subscribe to them. This is called lazy execution.
 - Observables provide operators like map, forEach, and reduce, which work similarly to array methods.
 - There are powerful operators like retry() and replay() available in Observables.
-- Lazy execution allows you to build a chain of operations before actually executing the Observable by subscribing to it. This enables a more declarative programming style.
+- Lazy execution allows you to build a chain of operations before actually executing the Observable by
+subscribing to it. This enables a more declarative programming style.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Explain the differences between Node.js and npm.
 
-Node.js and npm are two commonly used tools in the JavaScript ecosystem, but they serve different purposes and have distinct functionalities.
+Node.js and npm are two commonly used tools in the JavaScript ecosystem, but they serve different purposes and
+have distinct functionalities.
 
 1. Node.js:
-   - Purpose: Node.js is a JavaScript runtime environment that allows developers to run JavaScript code on the server-side.
+   - Purpose: Node.js is a JavaScript runtime environment that allows developers to run JavaScript code on the
+   server-side.
    - Features:
      - It provides a runtime environment for executing JavaScript code outside of a web browser.
      - It uses the V8 JavaScript engine, the same engine used by Google Chrome.
      - Node.js enables building server-side applications, command-line tools, and scripts using JavaScript.
      - It has a non-blocking, event-driven architecture, making it suitable for building scalable and high-performance applications.
-     - Node.js has a rich ecosystem of libraries and frameworks, such as Express.js for building web servers, Socket.io for real-time communication,
+     - Node.js has a rich ecosystem of libraries and frameworks, such as Express.js for building web servers,
+     Socket.io for real-time communication,
       and Sequelize for interacting with databases.
 
 2. npm (Node Package Manager):
@@ -341,14 +450,19 @@ Node.js and npm are two commonly used tools in the JavaScript ecosystem, but the
 
 Differences:
 
-- Purpose: Node.js is a JavaScript runtime environment for executing JavaScript code, while npm is a package manager for managing and sharing JavaScript packages.
-- Functionality: Node.js provides the runtime environment for executing JavaScript code, while npm provides the tools for managing dependencies and packages used in
+- Purpose: Node.js is a JavaScript runtime environment for executing JavaScript code, while npm is a package manager for
+managing and sharing JavaScript packages.
+- Functionality: Node.js provides the runtime environment for executing JavaScript code, while npm provides the tools
+for managing dependencies and packages used in
   Node.js projects.
-- Usage: Node.js is used for building server-side applications and scripts, while npm is used for installing and managing dependencies required by Node.js projects.
-- Relationship: npm is closely associated with Node.js and is typically installed alongside Node.js. However, npm can be used independently for managing JavaScript
+- Usage: Node.js is used for building server-side applications and scripts, while npm is used for installing
+and managing dependencies required by Node.js projects.
+- Relationship: npm is closely associated with Node.js and is typically installed alongside Node.js.
+However, npm can be used independently for managing JavaScript
 packages even without Node.js, although its primary usage is within Node.js projects.
 
-In summary, Node.js is the runtime environment for executing JavaScript code, while npm is the package manager for managing and sharing JavaScript packages used in Node.js projects.
+In summary, Node.js is the runtime environment for executing JavaScript code, while npm is the package manager for
+managing and sharing JavaScript packages used in Node.js projects.
 They work together to enable developers to build, deploy, and share JavaScript applications and libraries.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -361,7 +475,8 @@ The main difference between `ngOnInit` and the constructor in Angular is their t
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How do you handle errors in Angular applications?
 
-In Angular applications, errors can occur in various parts of the code, including components, services, and HTTP requests. Here are some common approaches to handle errors effectively:
+In Angular applications, errors can occur in various parts of the code, including components, services,
+and HTTP requests. Here are some common approaches to handle errors effectively:
 
 1. Error Handling in Components:
    - Use try-catch blocks to catch errors in critical sections of your component's code.
@@ -410,7 +525,8 @@ export class GlobalErrorHandler implements ErrorHandler {
 
 4. HTTP Interceptor:
    - Use an HTTP interceptor to intercept HTTP requests and responses and handle errors globally.
-   - Implement error handling logic in the interceptor to catch HTTP errors and provide a consistent error handling mechanism across the application.
+   - Implement error handling logic in the interceptor to catch HTTP errors and provide a consistent error
+   handling mechanism across the application.
 
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -433,29 +549,40 @@ export class ErrorInterceptor implements HttpInterceptor {
    - Use Angular's built-in mechanisms like template interpolation or Angular Material components to display error messages to users.
    - Customize error messages based on the type of error and context of the application.
 
-By implementing these error handling strategies, you can effectively handle errors in your Angular applications and provide a more robust and reliable user experience.
+By implementing these error handling strategies, you can effectively handle errors in your Angular applications
+and provide a more robust and reliable user experience.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 What is the difference between AOT (Ahead-of-Time) and JIT (Just-in-Time) compilers in Angular?
 
-The difference between AOT (Ahead-of-Time) and JIT (Just-in-Time) compilers in Angular lies in how the Angular application code is compiled and executed.
+The difference between AOT (Ahead-of-Time) and JIT (Just-in-Time) compilers in Angular lies in how the Angular
+application code is compiled and executed.
 
 1. Ahead-of-Time (AOT) Compilation:
-   - Compilation Time: AOT compilation happens during the build process, before the application is deployed to the client's browser.
-   - Compilation Process: The Angular application code is compiled into efficient JavaScript code and HTML templates are converted into JavaScript functions during the build process.
+   - Compilation Time: AOT compilation happens during the build process, before the application is deployed to
+   the client's browser.
+   - Compilation Process: The Angular application code is compiled into efficient JavaScript code and HTML templates
+   are converted into JavaScript functions during the build process.
    - Advantages:
      - Faster Application Startup: AOT-compiled code loads faster as there is no need for compilation in the client's browser.
-     - Detect Template Errors Early: AOT compilation detects template errors during the build process, enabling developers to catch errors before deploying the application.
-     - Smaller Bundle Sizes: AOT compilation reduces bundle sizes by eliminating the Angular compiler and other unnecessary code, resulting in faster download times for users.
-   - Usage: AOT compilation is typically used in production environments to optimize application performance and improve user experience.
+     - Detect Template Errors Early: AOT compilation detects template errors during the build process,
+     enabling developers to catch errors before deploying the application.
+     - Smaller Bundle Sizes: AOT compilation reduces bundle sizes by eliminating the Angular compiler and other
+     unnecessary code, resulting in faster download times for users.
+   - Usage: AOT compilation is typically used in production environments to optimize application performance and
+   improve user experience.
 
 2. Just-in-Time (JIT) Compilation:
    - Compilation Time: JIT compilation occurs at runtime, in the client's browser, when the application is being loaded.
-   - Compilation Process: The Angular application code, including templates, is compiled into JavaScript code by the Angular compiler in the client's browser.
+   - Compilation Process: The Angular application code, including templates, is compiled into JavaScript code by the
+   Angular compiler in the client's browser.
    - Advantages:
-     - Simplified Development Workflow: JIT compilation simplifies the development workflow as developers can make changes to the application code and see the changes reflected
+     - Simplified Development Workflow: JIT compilation simplifies the development workflow as developers can make
+     changes to the application code and see the changes reflected
      immediately in the browser without the need for a build step.
-     - Dynamic Templates: JIT compilation allows for dynamic generation and rendering of templates, enabling features like lazy loading and dynamic component creation.
-   - Usage: JIT compilation is typically used during development and testing phases of the application as it offers faster development turnaround times. However, it is
+     - Dynamic Templates: JIT compilation allows for dynamic generation and rendering of templates, enabling features
+     like lazy loading and dynamic component creation.
+   - Usage: JIT compilation is typically used during development and testing phases of the application as it offers
+   faster development turnaround times. However, it is
    not recommended for production environments due to slower application startup times and larger bundle sizes.
 
 In summary, AOT compilation is performed during the build process and results in faster application startup times, smaller bundle sizes, and early detection of template errors.

@@ -3,7 +3,8 @@
 - Class is blueprint of object which has some properties (variables) and behaviour (methods). Object is an instance of a class.
 - (Example: Human is template/blueprint/class, Child, Boy, Men, Women can be it's Objects. Their behaviour could be walk, eat etc...)
 - We can access properties and behaviour of a class using objects
-- If you have two constructor one is parameterized constructor and one is default constructor in your class you can call default constructor in your parameterized constructor using this().
+- If you have two constructor one is parameterized constructor and one is default constructor in your class you can call
+ default constructor in your parameterized constructor using this().
 - Example:
     static int count;
 
@@ -20,8 +21,9 @@
 
 - During inheritance super class is used to call parent class constructor
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Real-life Illustration of Polymorphism in Java: A person at the same time can have different characteristics. Like a man at the same time is a father, a husband,
-and an employee. So the same person possesses different behaviors in different situations. This is called polymorphism.
+Real-life Illustration of Polymorphism in Java: A person at the same time can have different characteristics.
+Like a man at the same time is a father, a husband,and an employee. So the same person possesses different
+behaviors in different situations. This is called polymorphism.
 
 Types of Java Polymorphism
     1. Compile-time Polymorphism (Method Overloading)

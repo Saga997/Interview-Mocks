@@ -1,0 +1,87 @@
+String: Once a String object is created, it cannot be modified. Any operation that seems to modify a String
+(like concatenation) actually creates a new String object.which can be memory-intensive and slower, especially in loops
+or when handling large data.Thread-Safe: Being immutable, String is inherently thread-safe.
+Multiple threads can access a String object simultaneously without causing any issues.
+Since String is immutable and each modification creates a new object, it can lead to more memory consumption if many modifications are made.
+Example:
+String str = "Hello";
+str = str.concat(" World"); // Creates a new String object "Hello World"
+System.out.println(str);    // Outputs "Hello World"
+ the original str object holding "Hello" remains unchanged. A new String object holding "Hello World" is
+ created and str now points to it.
+
+ String str = "Hello";
+ for (int i = 0; i < 1000; i++) {
+     str = str + i; // Creates a new String object every iteration
+ }
+
+
+ Mutable: StringBuffer objects can be modified after they are created. Methods like append(), insert(), delete(), etc.,
+  modify the content of the StringBuffer object without creating a new object.
+  Since StringBuffer is mutable, it doesn't create new objects when modified, making it more efficient for scenarios
+  where many modifications are required.
+
+ Example:
+ StringBuffer sb = new StringBuffer("Hello");
+ sb.append(" World"); // Modifies the same StringBuffer object
+ System.out.println(sb);    // Outputs "Hello World"
+ Here, the sb object is directly modified to hold "Hello World" without creating a new object.
+
+ StringBuffer sb = new StringBuffer("Hello");
+ for (int i = 0; i < 1000; i++) {
+     sb.append(i); // Modifies the same StringBuffer object
+ }
+
+ Thread-Safe: StringBuffer is synchronized, meaning that it is thread-safe.
+ Multiple threads cannot modify a StringBuffer object simultaneously. This makes it slower in single-threaded
+ scenarios compared to StringBuilder (a non-synchronized alternative to StringBuffer).
+
+ StringBuffer class in Java is used to represent a changeable string of characters.
+ It offers an alternative to the immutable String class by enabling you to change a string’s contents without
+ constantly creating new objects. Mutable (modifiable) strings are created with the help of the StringBuffer class.
+ The StringBuffer class in Java is identical to the String class except that it is changeable.
+
+ Which among String or String Buffer should be preferred when there are a lot of updates required to be done in the data?
+ The string is preferred over StringBuffer as StringBuilder is faster than StringBuffer, but StringBuffer objects are
+ the preferred over as it provides more thread safety.
+
+ String str1 = "Hello";
+ String str2 = "Hello";
+ System.out.println(str1 == str2); // Outputs: true//stored in String constant pool
+
+String str1 = new String("Hello");
+String str2 = new String("Hello");
+System.out.println(str1 == str2); // Outputs: false//stored in heap memory// when a distinct object is needed
+
+Arrays in Java are created in heap memory. When an array is created with the help of a new keyword,
+memory is allocated in the heap to store the elements of the array.
+
+‘this’ is a keyword used to reference a variable that refers to the current object.
+
+The initial value of an object reference which is defined as an instance variable is a NULL value.
+
+Methods to create objects in Java are mentioned below:
+Using new keyword
+Using new instance
+Using clone() method
+Using deserialization
+Using the newInstance() method of the Constructor class
+
+
+What are the advantages and disadvantages of object cloning?
+
+Advantages:
+
+In Java, the ‘=’ assignment operator cannot be used for cloning as it simply creates a copy of reference variables.
+To overcome such discrepancy the clone() method of Object class can be used over the assignment operator.
+The clone() method is a protected method of class Object which means that only the Employee class can clone Employee objects.
+This means no class other than Employee can clone Employee objects since it does not know the Employee class’ attributes.
+Code size decreases as repetition decreases.
+Allows replication (kind of like prototype pattern) manually initilizing each field creates large code if
+object is complex, its faster with cloning.
+
+Disadvantages:
+As the Object.clone() method is protected, so need to provide our own clone() and indirectly call Object.clone() from it.
+If we don’t have any methods then we need to provide a Cloneable interface as we need to provide JVM information so that we can perform a clone() on our object.if not, we cant clone clone does shallow copy of fields if we just return super.clone() from clone method that can be problematic.
+
+
